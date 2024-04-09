@@ -8,6 +8,8 @@ import javax.servlet.annotation.*;
 public class HelloServlet extends HttpServlet {
     private String message;
 
+    // init() , doGet(), destroy()는 서블릿 컨테이너가 서블릿들을 관리하면서 호출된다. 이런 메소드들을 일반적으로 서블릿의 라이프사이클이라고 한다
+
     public void init() {
         message = "Hello World!";
     }
