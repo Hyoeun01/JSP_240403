@@ -29,4 +29,16 @@ public enum TodoService {
         return todoDTOS;
     }
 
+    // 특정 번호의 조회기능
+    public TodoDTO get(Long tno){
+
+        TodoDTO dto = new TodoDTO();
+        dto.setTno(tno);
+        dto.setTitle("Sample Todo");
+        dto.setDueDate(LocalDate.now());
+        dto.setFinished(true);
+
+        return dto;
+    }
+
 }
