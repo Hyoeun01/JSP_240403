@@ -1,8 +1,10 @@
 package org.zerock.jdbcex.dao;
 
 import lombok.Cleanup;
+import org.zerock.jdbcex.domain.TodoVO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -37,5 +39,23 @@ public class TodoDAO {
         String now = rs.getString(1);
 
         return now;
+    }
+
+    // insert()는 파라미터로 입력된 TodoVO 객체의 정보를 이용해 DML을 실행하므로 executeUpdate()를 실행하도록 구성한다.
+    // PreparedStatement는 ?를 이용해서 나중에 전달할 데이터를 지정하는데, setXXX()를 이용해 실제 값을 지정한다.
+
+    public void insert(TodoVO vo) throws Exception {
+        String sql = "insert into tbl_todo (title, dueDate, finished) values (?, ?, ?)";
+
+        @Cleanup Connection conn = ConnectUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        // 인덱스 번호가 0이아닌 1부터 시작함에 주의하자.
+        // sql의 ?가 3개이므로 pstmt의 setXXX()도 3개여야 한다
+        pstmt.setString(1, vo.getTitle());
+        pstmt.setDate(2, Date.valueOf(vo.getDueDate()));
+        pstmt.setBoolean(3, vo.isFinished());
+
+        pstmt.executeUpdate();
     }
 }
