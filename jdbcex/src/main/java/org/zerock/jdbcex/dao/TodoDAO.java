@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TodoDAO {
 
@@ -57,5 +59,33 @@ public class TodoDAO {
         pstmt.setBoolean(3, vo.isFinished());
 
         pstmt.executeUpdate();
+    }
+
+
+    // 테이블의 각 행이 하나의 TodoVO의 객체가 되고, 모든 TodoVO를 담을 수 있도록 List<TodoVO> 타입을 리턴타입으로 지정
+    public List<TodoVO> selectAll() throws Exception {
+
+        String sql = "select * from tbl_todo";
+        @Cleanup Connection conn = ConnectUtil.INSTANCE.getConnection();
+        // 쿼리를 실행해야 하기 때문에 pstmt.executeQuery()를 이용해서 ResultSet을 구한다
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+        @Cleanup ResultSet rs = pstmt.executeQuery();
+
+        List<TodoVO> list = new ArrayList<>();
+
+        // ResultSet으로 각 행을 이동하면서 각 행의 데이터를 TodoVO로 변환한다.
+        // next()의 결과 이동할 수 있는 행이 존재하면 true, 아니면 false 반환
+        while(rs.next()) {
+            // 빌더 패턴을 이용해서 간편하게 객체를 생성할 수 있는데,
+            // tno/title 등의 속성값을 ResultSet에서 가져온 데이터로 처리한다. rs.getXXX()는 칼럼의 인덱스 번호를 이요하거나 칼럼의 이름을 지정해서 가져올 수 있고, 인덱스 번호를 이용할 경우 시작값이 1임을 기억해두자 ( 0이 아니다! )
+            TodoVO vo = TodoVO.builder()
+                    .tno(rs.getLong("tno"))
+                    .title(rs.getString("title"))
+                    .dueDate(rs.getDate("dueDate").toLocalDate())
+                    .finished(rs.getBoolean("finished"))
+                    .build();
+            list.add(vo);
+        }
+        return list;
     }
 }
