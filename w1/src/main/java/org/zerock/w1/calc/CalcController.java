@@ -24,5 +24,11 @@ public class CalcController extends HttpServlet {
 
         System.out.printf(" num1 : %s", num1);
         System.out.printf(" num2 : %s", num2);
+
+        // calcController의 응답이 브라우저에서 /index 경로로 가도록 함.
+        // 브라우저는 응답(Response) 헤더에 Location이 포함되면 브라우저의 주소창을 변경하고 해당 주소를 GET방식으로 호출
+
+        // 지금은 /index에 해당하는 컨트롤러가 존재하지 않기때문에 404 error가 난다.
+        resp.sendRedirect("/index");
     }
 }
