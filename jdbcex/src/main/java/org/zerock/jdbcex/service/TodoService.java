@@ -1,9 +1,10 @@
-package org.zerock.jdbcex.util;
+package org.zerock.jdbcex.service;
 
 import org.modelmapper.ModelMapper;
 import org.zerock.jdbcex.dao.TodoDAO;
 import org.zerock.jdbcex.domain.TodoVO;
 import org.zerock.jdbcex.dto.TodoDTO;
+import org.zerock.jdbcex.util.MapperUtil;
 
 public enum TodoService {
     INSTANCE;
