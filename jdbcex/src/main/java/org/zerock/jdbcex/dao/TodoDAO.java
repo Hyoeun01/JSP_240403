@@ -88,4 +88,24 @@ public class TodoDAO {
         }
         return list;
     }
+
+    public TodoVO selectOne(Long tno) throws Exception {
+        String sql = "select * from tbl_todo where tno = ?";
+
+        @Cleanup Connection conn = ConnectUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, tno);
+        @Cleanup ResultSet rs = pstmt.executeQuery();
+
+        rs.next();
+        TodoVO vo = TodoVO.builder()
+                .tno(rs.getLong("tno"))
+                .title(rs.getString("title"))
+                .dueDate(rs.getDate("dueDate").toLocalDate())
+                .finished(rs.getBoolean("finished"))
+                .build();
+
+        return vo;
+    }
 }
