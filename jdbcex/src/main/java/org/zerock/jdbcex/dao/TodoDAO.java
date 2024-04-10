@@ -108,4 +108,28 @@ public class TodoDAO {
 
         return vo;
     }
+
+    public void deleteOne(Long tno) throws Exception {
+        String sql = "delete from tbl_todo where tno = ?";
+
+        @Cleanup Connection conn = ConnectUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setLong(1, tno);
+        pstmt.executeUpdate();
+    }
+
+    public void updateOne(TodoVO todoVO) throws Exception {
+        String sql = "update tbl_todo set title =?, dueDate =?, finished =? where tno =?" ;
+
+        @Cleanup Connection conn = ConnectUtil.INSTANCE.getConnection();
+        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
+
+        pstmt.setString(1,todoVO.getTitle());
+        pstmt.setDate(2,Date.valueOf(todoVO.getDueDate()));
+        pstmt.setBoolean(3,todoVO.isFinished());
+        pstmt.setLong(4,todoVO.getTno());
+
+        pstmt.executeUpdate();
+    }
 }
