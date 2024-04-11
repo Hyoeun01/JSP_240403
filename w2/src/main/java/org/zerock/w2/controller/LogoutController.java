@@ -21,6 +21,7 @@ public class LogoutController extends HttpServlet {
         HttpSession session = req.getSession();
 
         session.removeAttribute("loginInfo");
+        // 세션과 관련된 모든데이터를 삭제하기
         session.invalidate();
 
         resp.sendRedirect("/");
