@@ -29,7 +29,7 @@ public class TodoReadController extends HttpServlet {
             req.setAttribute("dto", todoDTO);
 
             // read.jsp로 TodoDTO를 전달
-            req.getRequestDispatcher("/WEB-INF/views/todo/read.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/todo/read.jsp").forward(req, resp);
         } catch (Exception e) {
             log.error(e.getMessage());
             throw new ServletException("read error!");
