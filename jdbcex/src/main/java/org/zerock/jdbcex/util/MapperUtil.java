@@ -19,6 +19,7 @@ public enum MapperUtil {
     }
 
     // get()을 이용해서 ModelMapper를 사용가능
+    // get()밖에 없으므로 modelMapper는 수정이 불가능
     public ModelMapper get(){
         return modelMapper;
     }

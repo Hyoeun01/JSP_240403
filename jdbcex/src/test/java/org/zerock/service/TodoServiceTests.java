@@ -16,7 +16,6 @@ public class TodoServiceTests {
     }
 
     @Test
-
         public void testRegister() throws Exception {
             TodoDTO todoDTO = TodoDTO.builder()
                     .title("JDBC test title")
