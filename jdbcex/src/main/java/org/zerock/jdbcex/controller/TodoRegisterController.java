@@ -42,6 +42,7 @@ public class TodoRegisterController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // 리스트컨트롤러 호출
         resp.sendRedirect("/todo/list");
     }
 }
