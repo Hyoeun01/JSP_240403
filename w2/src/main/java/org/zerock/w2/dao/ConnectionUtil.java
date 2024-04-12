@@ -5,12 +5,12 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
 
-public enum ConnectUtil {
+public enum ConnectionUtil {
     INSTANCE;
 
     private HikariDataSource ds;
 
-    ConnectUtil() {
+    ConnectionUtil() {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("org.mariadb.jdbc.Driver");
         config.setJdbcUrl("jdbc:mariadb://localhost:3307/webdb");
