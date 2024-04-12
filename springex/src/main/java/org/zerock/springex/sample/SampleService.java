@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SampleService {
 
+    // @Qualifier( ) 내에 입력되는 이름을 가진 클래스가 주입된다.
     @Qualifier("normal")
     private final SampleDAO sampleDAO;
 }
