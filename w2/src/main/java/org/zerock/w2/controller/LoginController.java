@@ -7,10 +7,7 @@ import org.zerock.w2.service.MemberService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -47,6 +44,12 @@ public class LoginController extends HttpServlet {
 
                 MemberService.INSTANCE.updateUuid(mid,uuid);
                 memberDTO.setUuid(uuid);
+
+                Cookie rememberCookie = new Cookie("remember-me", uuid);
+                rememberCookie.setMaxAge(60*60*24*7); // 쿠키의 유효기간은 1주일
+                rememberCookie.setPath("/");
+
+                resp.addCookie(rememberCookie);
             }
 
             // 정상적으로 로그인 된 경우 HttpSession을 이용해서 loginInfo라는 이름으로 객체저장
