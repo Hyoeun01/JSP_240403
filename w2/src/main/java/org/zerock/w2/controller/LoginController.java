@@ -1,6 +1,7 @@
 package org.zerock.w2.controller;
 
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.zerock.w2.dto.MemberDTO;
 import org.zerock.w2.service.MemberService;
 
@@ -14,7 +15,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @WebServlet("/login")
-@Log
+@Log4j2
 
 // 브라우저 실행해서 /login 으로 접속후 아이디 비밀번호 입력하고 LOGIN버튼 누르면 /todo/list로 리다이렉트 됨
 // 리다이렉트 된 화면에서 /todo/register를 호출하면 로그인한 사용자로 간주되어서 정상적으로 작성화면이 나옴
@@ -37,11 +38,16 @@ public class LoginController extends HttpServlet {
 
         boolean rememberMe = auto != null && auto.equals("on");
 
-        if(rememberMe){
-            String uuid = UUID.randomUUID().toString();
-        }
+
         try {
             MemberDTO memberDTO = MemberService.INSTANCE.login(mid,mpw);
+
+            if(rememberMe){
+                String uuid = UUID.randomUUID().toString();
+
+                MemberService.INSTANCE.updateUuid(mid,uuid);
+                memberDTO.setUuid(uuid);
+            }
 
             // 정상적으로 로그인 된 경우 HttpSession을 이용해서 loginInfo라는 이름으로 객체저장
             HttpSession session = req.getSession();
