@@ -16,6 +16,8 @@
 <body>
 <h1>Todo List</h1>
 <ul>
+    <h2>${loginInfo}</h2>
+    <h3>${loginInfo.mname}</h3>
     <c:forEach items="${dtoList}" var="dto">
         <li>
             <span><a href="/todo/read?tno=${dto.tno}">${dto.tno}</a></span>
