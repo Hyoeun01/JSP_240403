@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- status 속성은 Log4j 구성의 로깅 레벨을 설정합니다.
+         WARN으로 설정되어 있으므로 WARN 레벨 이상의 로그 이벤트만 출력됩니다. -->
 <Configuration status="WARN">
+
+    <!-- Appenders 요소는 로그 이벤트가 출력될 위치를 정의합니다. -->
     <Appenders>
+
+        <!-- name 속성은 Appender의 이름을 지정합니다. -->
+        <!-- target 속성은 로그를 출력할 대상을 지정합니다. 여기서는 콘솔로 지정됩니다. -->
         <Console name = "Console" target = "SYSTEM_OUT">
+            <!-- PatternLayout은 로그 이벤트의 출력 형식을 지정합니다. -->
+            <!-- pattern 속성은 로그 메시지의 형식을 정의합니다. -->
+            <!-- %d는 날짜 및 시간, %t는 스레드 이름, %level은 로그 레벨, %logger는 로거 이름, %msg는 로그 메시지를 나타냅니다. -->
             <PatternLayOut pattern = "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
     </Appenders>
 
+    <!-- Loggers 요소는 로깅 이벤트를 받아들이고 처리하는 로그 이벤트 수신기를 정의합니다. -->
     <Loggers>
+
+        <!-- Root 요소는 모든 로그 이벤트의 최상위 로거를 정의합니다. -->
+        <!-- level 속성은 최상위 로그 레벨을 지정합니다. 여기서는 INFO로 설정되어 있으므로 INFO 레벨 이상의 로그 이벤트가 출력됩니다. log.info()메소드의 info와는 관계가 없습니다!-->
         <Root level = "info">
+
+            <!-- AppenderRef는 로그 이벤트를 특정 Appender로 라우팅하는 방법을 정의합니다. -->
+            <!-- ref 속성은 Appender의 이름을 지정합니다. -->
+            <!-- 여기서는 Console Appender로 지정되어 있으므로 모든 로그 이벤트가 콘솔에 출력됩니다. -->
             <AppenderRef ref = "Console"/>
         </Root>
     </Loggers>

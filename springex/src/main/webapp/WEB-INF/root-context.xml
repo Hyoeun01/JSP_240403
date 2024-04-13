@@ -32,6 +32,6 @@ http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-sprin
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <myvatis:scan base-package="org.zerock.springex.mapper"></myvatis:scan>
+    <mybatis:scan base-package="org.zerock.springex.mapper"></mybatis:scan>
 
 </beans>
