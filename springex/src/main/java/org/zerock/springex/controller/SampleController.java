@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.springex.dto.TodoDTO;
 
 import java.time.LocalDate;
@@ -61,5 +62,21 @@ public class SampleController {
                 .build();
 
         model.addAttribute("todoDTO",todoDTO);
+    }
+
+    @GetMapping("/ex5")
+    public String ex5(RedirectAttributes redirectAttributes) {
+        log.info("ex5........................");
+        // 리다이렉트할 때 쿼리 스트링이 되는 값을 지정
+        redirectAttributes.addAttribute("name","ABC");
+
+        // 일회용으로만 데이터를 전달하고 삭제되는 값을 지정 : url에는 보이지 않지만 jsp에서 사용가능하다
+        redirectAttributes.addFlashAttribute("result","success");
+
+        return "redirect:/ex6";
+    }
+    @GetMapping("/ex6")
+    public void ex6(){
+        log.info("ex6........................");
     }
 }
