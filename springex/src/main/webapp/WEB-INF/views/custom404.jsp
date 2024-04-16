@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1> 주소 제대로 안썼지롱 :D </h1>
+<h1> 404지롱</h1>
 </body>
 </html>
