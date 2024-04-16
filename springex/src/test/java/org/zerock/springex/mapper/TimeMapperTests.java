@@ -13,11 +13,21 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
 public class TimeMapperTests {
 
+    // 해당 객체를 주입받지 못해도 예외가 발생하지 않음
+    // required=false 옵션이 없으면 timeMapper에 오류가 난다
     @Autowired(required = false)
     private TimeMapper timeMapper;
 
     @Test
     public void testGetTime(){
         log.info(timeMapper.getTime());
+    }
+
+    @Autowired(required = false)
+    private TimeMapper2 timeMapper2;
+
+    @Test
+    public void testNow(){
+        log.info(timeMapper2.getNow());
     }
 }

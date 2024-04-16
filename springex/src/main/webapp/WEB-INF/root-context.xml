@@ -31,8 +31,10 @@ http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-sprin
     </bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
     </bean>
 
+<!--    맵퍼는 어디서든 sql을 사용가능하게 해준다-->
     <mybatis:scan base-package="org.zerock.springex.mapper"></mybatis:scan>
 
 </beans>
