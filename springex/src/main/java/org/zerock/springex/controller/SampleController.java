@@ -1,7 +1,6 @@
 package org.zerock.springex.controller;
 
 import lombok.extern.log4j.Log4j2;
-import lombok.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,7 +75,14 @@ public class SampleController {
         return "redirect:/ex6";
     }
     @GetMapping("/ex6")
-    public void ex6(){
-        log.info("ex6........................");
+    public void ex6(String name,Model model){
+        log.info("ex6....................name: "+name);
+        model.addAttribute("name",name);
+    }
+
+    @GetMapping("/ex7")
+    public void ex7(String p1, int p2) {
+        log.info("p1......"+p1);
+        log.info("p2......"+p2);
     }
 }
