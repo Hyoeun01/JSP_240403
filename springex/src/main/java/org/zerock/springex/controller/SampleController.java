@@ -1,7 +1,10 @@
 package org.zerock.springex.controller;
 
 import lombok.extern.log4j.Log4j2;
+import lombok.*;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -36,5 +39,12 @@ public class SampleController {
     public void ex3(LocalDate dueDate) {
         log.info("ex3.........................");
         log.info("dueDate : "+dueDate);
+    }
+
+    @GetMapping("/ex4")
+    public void ex4( Model model) {
+
+        log.info("------------------------");
+        model.addAttribute("message","hello world");
     }
 }
