@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.zerock.springex.dto.TodoDTO;
 
 import java.time.LocalDate;
 
@@ -46,5 +47,19 @@ public class SampleController {
 
         log.info("------------------------");
         model.addAttribute("message","hello world");
+    }
+
+    @GetMapping("/ex4_1")
+    public void ex4Extra(Model model) {
+        log.info("ex4Extra...............");
+        TodoDTO todoDTO = TodoDTO.builder()
+                .tno(20L)
+                .title("sample data")
+                .dueDate(LocalDate.parse("2024-02-10"))
+                .finished(true)
+                .writer("test writer")
+                .build();
+
+        model.addAttribute("todoDTO",todoDTO);
     }
 }
