@@ -26,13 +26,13 @@
 
     <header id="header" class="">
         <div class="header_area box_inner clear">
-            <h1><a href="index.jsp">Tourist in tour</a></h1>
+            <h1><a href="/">Tourist in tour</a></h1>
             <p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
             <!-- header_cont -->
             <div class="header_cont" style="display: block;">
                 <ul class="util clear">
-                    <li><a href="login.html">로그인</a></li>
-                    <li><a href="join.html">회원가입</a></li>
+                    <li><a href="/login">로그인</a></li>
+                    <li><a href="/join">회원가입</a></li>
                 </ul>
                 <nav>
                     <ul class="gnb clear">
@@ -48,7 +48,7 @@
                         <li><a href="javascript:;" class="openAll2">고객센터</a>
                             <div class="gnb_depth gnb_depth2_2" style="display: none;">
                                 <ul class="submenu_list">
-                                    <li><a href="notice_list.html">공지사항</a></li>
+                                    <li><a href="notice_list.jsp">공지사항</a></li>
                                     <li><a href="javascript:;">문의하기</a></li>
                                 </ul>
                             </div>
@@ -56,7 +56,7 @@
                         <li><a href="javascript:;" class="openAll3">상품투어</a>
                             <div class="gnb_depth gnb_depth2_3" style="display: none;">
                                 <ul class="submenu_list">
-                                    <li><a href="program.html">프로그램 소개</a></li>
+                                    <li><a href="program.jsp">프로그램 소개</a></li>
                                     <li><a href="javascript:;">여행자료</a></li>
                                 </ul>
                             </div>

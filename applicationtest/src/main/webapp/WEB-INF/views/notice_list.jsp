@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="ko"><head>
-    <title> 박물관 미션 투어 당첨자 발표 | 공지사항 | 고객센터 | 투어리스트인투어 </title>
+    <title> 공지사항 | 고객센터 | 투어리스트인투어 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,7 +50,7 @@
                             </div>
                         </li>
                         <li><a href="javascript:;" class="openAll2">고객센터</a>
-                            <div class="gnb_depth gnb_depth2_2" style="display: none;">
+                            <div class="gnb_depth gnb_depth2_2">
                                 <ul class="submenu_list">
                                     <li><a href="notice_list.html">공지사항</a></li>
                                     <li><a href="javascript:;">문의하기</a></li>
@@ -66,7 +66,7 @@
                             </div>
                         </li>
                         <li><a href="javascript:;" class="openAll4">티켓/가이드</a>
-                            <div class="gnb_depth gnb_depth2_4" style="display: none; opacity: 1;">
+                            <div class="gnb_depth gnb_depth2_4">
                                 <ul class="submenu_list">
                                     <li><a href="javascript:;">항공</a></li>
                                     <li><a href="javascript:;">호텔</a></li>
@@ -97,29 +97,107 @@
 
         <!-- bodytext_area -->
         <div class="bodytext_area box_inner">
-            <form action="" method="POST">
-                <ul class="bbsview_list">
-                    <li class="bbs_title">제목 : <input type="text" name="title" size="100" placeholder="제목을 입력해주세요."></li>
-                    <li class="bbs_content">
-                        <div class="editer_content">
-                            <textarea name="contents" cols="110" rows="20" placeholder="내용을 입력해주세요."></textarea>
-                        </div>
-                    </li>
-                </ul>
-                <p class="btn_line txt_right">
-                    <input type="submit" value="글쓰기" class="btn_srch">
-                    <a href="notice_list.html" class="btn_bbs">목록</a>
-                </p>
+            <form action="#" class="minisrch_form">
+                <fieldset>
+                    <legend>검색</legend>
+                    <input type="text" class="tbox" title="검색어를 입력해주세요" placeholder="검색어를 입력해주세요">
+                    <a href="javascript:;" class="btn_srch">검색</a>
+                    <button type="button" class="btn_srch"><a href="/notice_add"> 글쓰기</a></button>
+                </fieldset>
             </form>
-            <ul class="near_list mt20">
-                <li><h4 class="prev">다음글</h4><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
-                <li><h4 class="next">이전글</h4><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li>
-            </ul>
+            <table class="bbsListTbl" summary="번호,제목,조회수,작성일 등을 제공하는 표">
+                <caption class="hdd">공지사항  목록</caption>
+                <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">조회수</th>
+                    <th scope="col">작성일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="tit_notice"><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="tit_notice"><a href="javascript:;">박물관 미션 투어 응모 당첨자 발표</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td class="tit_notice"><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="tit_notice"><a href="javascript:;">하롱베이 서비스 OPEN! (여행정보, 가이드북, 가이드맵)</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td class="tit_notice"><a href="javascript:;">투어리스트인투어 서비스 점검 안내 - 투어리스트인투어에서 매월 실시하는 정기점검 안내</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td class="tit_notice"><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td class="tit_notice"><a href="javascript:;">박물관 미션 투어 응모 당첨자 발표</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td class="tit_notice"><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td class="tit_notice"><a href="javascript:;">하롱베이 서비스 OPEN! (여행정보, 가이드북, 가이드맵)</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td class="tit_notice"><a href="javascript:;">투어리스트인투어 서비스 점검 안내</a> </td>
+                    <td>123</td>
+                    <td>2018-08-01</td>
+                </tr>
+                </tbody>
+            </table>
+            <!-- pagination -->
+            <div class="pagination">
+                <a href="javascript:;" class="firstpage  pbtn"><img src="img/btn_firstpage.png" alt="첫 페이지로 이동"></a>
+                <a href="javascript:;" class="prevpage  pbtn"><img src="img/btn_prevpage.png" alt="이전 페이지로 이동"></a>
+                <a href="javascript:;"><span class="pagenum currentpage">1</span></a>
+                <a href="javascript:;"><span class="pagenum">2</span></a>
+                <a href="javascript:;"><span class="pagenum">3</span></a>
+                <a href="javascript:;"><span class="pagenum">4</span></a>
+                <a href="javascript:;"><span class="pagenum">5</span></a>
+                <a href="javascript:;" class="nextpage  pbtn"><img src="img/btn_nextpage.png" alt="다음 페이지로 이동"></a>
+                <a href="javascript:;" class="lastpage  pbtn"><img src="img/btn_lastpage.png" alt="마지막 페이지로 이동"></a>
+            </div>
+            <!-- //pagination -->
+
         </div>
         <!-- //bodytext_area -->
 
     </div>
     <!-- //container -->
+
     <footer>
         <div class="foot_area box_inner">
             <ul class="foot_list clear">

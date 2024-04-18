@@ -45,20 +45,16 @@
     <div id="container">
 
         <!-- bodytext_area -->
-        <form action="/" method="POST">
+        <form action="/login" method="POST">
             <div class="bodytext_area box_inner">
                 <!-- login-wrap -->
                 <div class="login_wrap">
-                    <h1 class="loginTit"><a href="index.jsp"><img src="img/tit_login.png" alt="TOURIST IN TOUR"></a></h1>
+                    <h1 class="loginTit"><a href="/"><img src="img/tit_login.png" alt="TOURIST IN TOUR"></a></h1>
                     <ul class="login_list">
                         <li><input type="text" name="id" size="32"></li>
                         <li><input type="password" name="pw" size="32"></li>
                         <li><button type="submit" class="btn_srch">로그인</button></li>
                         <input type="hidden" id="autologin" value="off">
-                        <!-- <li class="kakao"><a href="javascript:;"><strong>카카오톡</strong> 로그인</a></li>
-                        <li class="naver"><a href="javascript:;"><strong>네이버</strong> 로그인</a></li>
-                        <li class="facebook"><a href="javascript:;"><strong>페이스북</strong> 로그인</a></li>
-                        <li class="cellphone"><a href="javascript:;"><strong>이메일 주소</strong> 로그인</a></li> -->
                     </ul>
 
                     <div class="btnonoff_line">

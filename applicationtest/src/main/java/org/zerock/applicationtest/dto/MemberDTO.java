@@ -23,4 +23,5 @@ public class MemberDTO {
     private String gender;
     private boolean agree;
     private Date create_date;
+
 }

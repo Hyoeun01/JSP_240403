@@ -11,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="css/common.css">
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/common.js"></script>
-    <script src="js/jquery.smooth-scroll.min.js"></script>
+    <link rel="stylesheet" href="../../css/common.css">
+    <script src="../../js/jquery-1.11.3.min.js"></script>
+    <script src="../../js/common.js"></script>
+    <script src="../../js/jquery.smooth-scroll.min.js"></script>
     <!--[if lte IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/placeholders.min.js"></script>
@@ -30,13 +30,13 @@
 
     <header id="header">
         <div class="header_area box_inner clear">
-            <h1><a href="index.html">Tourist in tour</a></h1>
+            <h1><a href="/">Tourist in tour</a></h1>
             <p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
             <!-- header_cont -->
             <div class="header_cont">
                 <ul class="util clear">
-                    <li><a href="login.html">로그인</a></li>
-                    <li><a href="javascript:">회원가입</a></li>
+                    <li><a href="/login">로그인</a></li>
+                    <li><a href="/join">회원가입</a></li>
                 </ul>
                 <nav>
                     <ul class="gnb clear">
@@ -97,7 +97,7 @@
         <!-- bodytext_area -->
         <div class="bodytext_area box_inner">
             <!-- appForm -->
-            <form action="/index.jsp" class="appForm" method="post">
+            <form action="/join" class="appForm" method="post">
                 <fieldset>
                     <legend>상담문의 입력 양식</legend>
                     <p class="info_pilsoo pilsoo_item">필수입력</p>
@@ -105,25 +105,18 @@
                         <li class="clear">
                             <label for="email_lbl" class="tit_lbl pilsoo_item">이메일</label>
                             <div class="app_content email_area">
-                                <input type="text" class="w160" id="email_lbl" title="이메일 주소">
+                                <input type="text" class="w160" id="email_lbl" name="email1" title="이메일 주소">
                                 <span class="ico_space">@</span>
-                                <input type="text" class="w160" title="이메일 제공업체 입력">
-                                <div class="select_common">
-                                    <select title="이메일 제공업체 목록">
-                                        <option value="">직접입력</option>
-                                        <option value="">naver.com</option>
-                                        <option value="">hanmail.net</option>
-                                    </select>
-                                </div>
+                                <input type="text" class="w160" name="email2" title="이메일 제공업체 입력">
                             </div>
                         </li>
                         <li class="clear">
                             <label for="name_lbl" class="tit_lbl pilsoo_item">작성자명</label>
-                            <div class="app_content"><input type="text" class="w100p" id="name_lbl" placeholder="이름을 입력해주세요"></div>
+                            <div class="app_content"><input type="text" class="w100p" id="name_lbl" name="name" placeholder="이름을 입력해주세요"></div>
                         </li>
                         <li class="clear">
                             <label for="pwd_lbl" class="tit_lbl pilsoo_item">비밀번호</label>
-                            <div class="app_content"><input type="password" class="w100p" id="pwd_lbl" placeholder="비밀번호를 입력해주세요"></div>
+                            <div class="app_content"><input type="password" class="w100p" id="pwd_lbl" name="member_pw" placeholder="비밀번호를 입력해주세요"></div>
                         </li>
                         <li class="clear">
                             <label for="pwd2_lbl" class="tit_lbl pilsoo_item">비밀번호 확인</label>
@@ -131,13 +124,13 @@
                         </li>
                         <li class="clear">
                             <label for="phone_lbl" class="tit_lbl pilsoo_item">연락처</label>
-                            <div class="app_content"><input type="tel" class="w100p" id="phone_lbl" placeholder="휴대폰”-”없이 숫자만 입력하세요"></div>
+                            <div class="app_content"><input type="tel" class="w100p" id="phone_lbl" name="phone" placeholder="휴대폰”-”없이 숫자만 입력하세요"></div>
                         </li>
                         <li class="clear">
                             <span class="tit_lbl">성별</span>
                             <div class="app_content radio_area">
-                                <input type="radio" class="css-radio" id="mmm_lbl" name="gender"><label for="mmm_lbl">남</label>
-                                <input type="radio" class="css-radio" id="www_lbl" name="gender"><label for="www_lbl">여</label>
+                                <input type="radio" class="css-radio" id="mmm_lbl" name="gender" value="male"><label for="mmm_lbl">남</label>
+                                <input type="radio" class="css-radio" id="www_lbl" name="gender" value="fmale"><label for="www_lbl">여</label>
                             </div>
                         </li>
                         <li class="clear">
@@ -152,7 +145,7 @@
 전화 상담 희망시 기재 부탁드립니다."></textarea></div>
                         </li>
                     </ul>
-                    <p class="btn_line"><a href="javascript:;" class="btn_baseColor">등록</a></p>
+                    <p class="btn_line"><button type="submit" class="btn_baseColor">등록</button></p>
                 </fieldset>
             </form>
             <!-- //appForm -->
