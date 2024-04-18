@@ -21,6 +21,7 @@ public class NoticeDAO {
         pstmt.executeUpdate();
     }
 
+//    프로그램 dao
     public List<NoticeDTO> selectAllNotice() throws Exception {
         String sql = "select * from notice";
 
