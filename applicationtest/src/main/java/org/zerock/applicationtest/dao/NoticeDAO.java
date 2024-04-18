@@ -51,17 +51,18 @@ public class NoticeDAO {
         rs.next();
 
         NoticeDTO dto = NoticeDTO.builder()
+                .no(rs.getInt("no"))
                 .title(rs.getString("title"))
-                .create_date(rs.getDate("create_date"))
-                .count(rs.getInt("count"))
                 .content(rs.getString("content"))
+                .count(rs.getInt("count"))
+                .create_date(rs.getDate("create_date"))
                 .build();
 
         return dto;
     }
 
     public void deleteOneNotice(int no) throws Exception {
-        String sql = "delete from notice where no=?";
+        String sql = "delete from notice where no = ? ";
         @Cleanup Connection connection = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement pstmt = connection.prepareStatement(sql);
         pstmt.setInt(1, no);

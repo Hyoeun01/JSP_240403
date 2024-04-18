@@ -31,7 +31,7 @@
 
     <header id="header">
         <div class="header_area box_inner clear">
-            <h1><a href="index.html">Tourist in tour</a></h1>
+            <h1><a href="/">Tourist in tour</a></h1>
             <p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
             <!-- header_cont -->
             <div class="header_cont">
@@ -44,7 +44,7 @@
                             <li><a href="/logout">로그아웃</a></li>
                         </c:otherwise>
                     </c:choose>
-                    <li><a href="join.html">회원가입</a></li>
+                    <li><a href="/join">회원가입</a></li>
                 </ul>
                 <nav>
                     <ul class="gnb clear">
@@ -68,7 +68,7 @@
                         <li><a href="javascript:;" class="openAll3">상품투어</a>
                             <div class="gnb_depth gnb_depth2_3">
                                 <ul class="submenu_list">
-                                    <li><a href="program.html">프로그램 소개</a></li>
+                                    <li><a href="/program">프로그램 소개</a></li>
                                     <li><a href="javascript:;">여행자료</a></li>
                                 </ul>
                             </div>

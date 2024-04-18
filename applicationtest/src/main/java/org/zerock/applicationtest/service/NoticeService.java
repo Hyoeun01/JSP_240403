@@ -24,6 +24,7 @@ public enum NoticeService {
 
     public NoticeDTO getNotice(int no) throws Exception {
         log.info("no : "+no);
+
         return dao.selectOneNotice(no);
     }
 

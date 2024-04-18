@@ -68,7 +68,7 @@
                         <li><a href="javascript:;" class="openAll3">상품투어</a>
                             <div class="gnb_depth gnb_depth2_3">
                                 <ul class="submenu_list">
-                                    <li><a href="program.html">프로그램 소개</a></li>
+                                    <li><a href="/program">프로그램 소개</a></li>
                                     <li><a href="javascript:;">여행자료</a></li>
                                 </ul>
                             </div>

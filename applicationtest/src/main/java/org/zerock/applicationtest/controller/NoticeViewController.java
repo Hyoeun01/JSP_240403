@@ -1,5 +1,6 @@
 package org.zerock.applicationtest.controller;
 
+import org.zerock.applicationtest.dto.NoticeDTO;
 import org.zerock.applicationtest.service.NoticeService;
 
 import javax.servlet.ServletException;
@@ -16,22 +17,30 @@ public class NoticeViewController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer no = Integer.parseInt(req.getParameter("no")) ;
-
-//        try {
-//            noticeService.removeNotice(no);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
 
         try{
-            noticeService.getNotice(no);
+
+            int no = Integer.parseInt(req.getParameter("no")) ;
+            NoticeDTO noticeDTO = noticeService.getNotice(no);
+
+            req.setAttribute("notice", noticeDTO);
+
+            req.getRequestDispatcher("/WEB-INF/views/notice_view.jsp").forward(req, resp);
+
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        req.getRequestDispatcher("/WEB-INF/views/notice_view.jsp").forward(req, resp);
     }
 
-
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int no = Integer.parseInt(req.getParameter("no")) ;
+        try{
+            noticeService.removeNotice(no);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        resp.sendRedirect("/notice_list");
+    }
 }

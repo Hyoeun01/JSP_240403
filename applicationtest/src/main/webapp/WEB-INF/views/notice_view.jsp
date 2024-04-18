@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html lang="ko"><head>
-    <title> 박물관 미션 투어 당첨자 발표 | 공지사항 | 고객센터 | 투어리스트인투어 </title>
+    <title> ${notice.title} | 공지사항 | 고객센터 | 투어리스트인투어 </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,7 +31,7 @@
 
     <header id="header">
         <div class="header_area box_inner clear">
-            <h1><a href="index.html">Tourist in tour</a></h1>
+            <h1><a href="/">Tourist in tour</a></h1>
             <p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
             <!-- header_cont -->
             <div class="header_cont">
@@ -68,7 +68,7 @@
                         <li><a href="javascript:;" class="openAll3">상품투어</a>
                             <div class="gnb_depth gnb_depth2_3" style="display: none; opacity: 1;">
                                 <ul class="submenu_list">
-                                    <li><a href="program.html">프로그램 소개</a></li>
+                                    <li><a href="/program">프로그램 소개</a></li>
                                     <li><a href="javascript:;">여행자료</a></li>
                                 </ul>
                             </div>
@@ -115,10 +115,13 @@
                     </div>
                 </li>
             </ul>
-            <p class="btn_line txt_right">
-                <a href="/notice_list" class="btn_bbs">삭제</a>
-                <a href="/notice_list" class="btn_bbs">목록</a>
-            </p>
+            <form action="/notice" method="post">
+                <p class="btn_line txt_right">
+                    <input type="hidden" name="no" value="${notice.no}" readonly>
+                    <button type="submit" class="btn_bbs">삭제</button>
+                    <a href="/notice_list" class="btn_bbs">목록</a>
+                </p>
+            </form>
             <ul class="near_list mt20">
                 <li><h4 class="prev">다음글</h4><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
                 <li><h4 class="next">이전글</h4><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a></li>
