@@ -25,23 +25,4 @@ public class MemberDAO {
         pstmt.executeUpdate();
     }
 
-    public MemberDTO selectOne(String email1) throws Exception {
-
-        String sql = "SELECT email1,member_pw FROM member WHERE email1 = ?";
-
-        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
-        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-
-        pstmt.setString(1,email1);
-        @Cleanup ResultSet rs = pstmt.executeQuery();
-
-        rs.next();
-        MemberDTO memberDTO = MemberDTO.builder()
-                .email1(rs.getString("email1"))
-                .member_pw(rs.getString("member_pw"))
-                .build();
-
-        return memberDTO;
-    }
-
 }

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="ko"><head>
     <title> 투어리스트인투어 </title>
@@ -24,14 +25,21 @@
 <!-- wrap -->
 <div id="wrap">
 
-    <header id="header" class="">
+    <header id="header">
         <div class="header_area box_inner clear">
             <h1><a href="/">Tourist in tour</a></h1>
             <p class="openMOgnb"><a href="#"><b class="hdd">메뉴열기</b> <span></span><span></span><span></span></a></p>
             <!-- header_cont -->
             <div class="header_cont" style="display: block;">
                 <ul class="util clear">
-                    <li><a href="/login">로그인</a></li>
+                    <c:choose>
+                        <c:when test="${empty loginInfo}">
+                            <li><a href="/login">로그인</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/logout">로그아웃</a></li>
+                        </c:otherwise>
+                    </c:choose>
                     <li><a href="/join">회원가입</a></li>
                 </ul>
                 <nav>

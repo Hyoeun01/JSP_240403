@@ -51,8 +51,8 @@
                 <div class="login_wrap">
                     <h1 class="loginTit"><a href="/"><img src="img/tit_login.png" alt="TOURIST IN TOUR"></a></h1>
                     <ul class="login_list">
-                        <li><input type="text" name="id" size="32"></li>
-                        <li><input type="password" name="pw" size="32"></li>
+                        <li><input type="text" name="email1" size="32"></li>
+                        <li><input type="password" name="member_pw" size="32"></li>
                         <li><button type="submit" class="btn_srch">로그인</button></li>
                         <input type="hidden" id="autologin" value="off">
                     </ul>
