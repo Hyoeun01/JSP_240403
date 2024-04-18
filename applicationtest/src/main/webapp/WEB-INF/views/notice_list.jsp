@@ -110,7 +110,7 @@
                     <legend>검색</legend>
                     <input type="text" class="tbox" title="검색어를 입력해주세요" placeholder="검색어를 입력해주세요">
                     <a href="javascript:;" class="btn_srch">검색</a>
-                    <button type="button" class="btn_srch"><a href="/notice_add"> 글쓰기</a></button>
+                    <a href="/notice_add" class="btn_srch"> 글쓰기</a>
                 </fieldset>
             </form>
             <table class="bbsListTbl" summary="번호,제목,조회수,작성일 등을 제공하는 표">
@@ -124,66 +124,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td class="tit_notice"><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td class="tit_notice"><a href="javascript:;">박물관 미션 투어 응모 당첨자 발표</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td class="tit_notice"><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td class="tit_notice"><a href="javascript:;">하롱베이 서비스 OPEN! (여행정보, 가이드북, 가이드맵)</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td class="tit_notice"><a href="javascript:;">투어리스트인투어 서비스 점검 안내 - 투어리스트인투어에서 매월 실시하는 정기점검 안내</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td class="tit_notice"><a href="javascript:;">이번 여름 휴가 제주 갈까? 미션 투어 (여행경비 50만원 지원)</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td class="tit_notice"><a href="javascript:;">박물관 미션 투어 응모 당첨자 발표</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td class="tit_notice"><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td class="tit_notice"><a href="javascript:;">하롱베이 서비스 OPEN! (여행정보, 가이드북, 가이드맵)</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td class="tit_notice"><a href="javascript:;">투어리스트인투어 서비스 점검 안내</a> </td>
-                    <td>123</td>
-                    <td>2018-08-01</td>
-                </tr>
+                <c:forEach var="notice" items="${list}">
+                    <tr>
+                        <td>${notice.no}</td>
+                        <td class="tit_notice"><a href="/notice_list?no=${notice.no}">${notice.title}</a></td>
+                        <td>${notice.count}</td>
+                        <td>${notice.create_date}</td>
+                    </tr>
+                </c:forEach>
+
                 </tbody>
             </table>
             <!-- pagination -->

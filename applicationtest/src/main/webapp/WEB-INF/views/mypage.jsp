@@ -52,7 +52,7 @@
                         <li><a href="javascript:;" class="openAll2">고객센터</a>
                             <div class="gnb_depth gnb_depth2_2" style="display: none;">
                                 <ul class="submenu_list">
-                                    <li><a href="notice_list.html">공지사항</a></li>
+                                    <li><a href="/notice_list">공지사항</a></li>
                                     <li><a href="javascript:;">문의하기</a></li>
                                 </ul>
                             </div>
@@ -145,7 +145,7 @@
                                     <div class="reg_content radio_area">
                                         <input type="radio" class="css-radio" id="emailyes_lbl" name="emailyesno" checked=""><label for="emailyes_lbl">허용</label>
                                         <input type="radio" class="css-radio" id="emailno_lbl" name="emailyesno"><label for="emailno_lbl">거부</label>
-                                        <p class="info_line">(고객님의 편의를 위해 알림, 공지사항, 이벤트 등의 내용을 제공하고자 합니다.)</p>
+                                        <p class="info_line">(고객님의 편의를 위해 알림, 사항, 이벤트 등의 내용을 제공하고자 합니다.)</p>
                                     </div>
                                 </li>
                             </ul>

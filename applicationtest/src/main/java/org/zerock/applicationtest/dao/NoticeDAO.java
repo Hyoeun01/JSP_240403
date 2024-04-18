@@ -4,9 +4,7 @@ import lombok.Cleanup;
 import org.zerock.applicationtest.dto.MemberDTO;
 import org.zerock.applicationtest.dto.NoticeDTO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 

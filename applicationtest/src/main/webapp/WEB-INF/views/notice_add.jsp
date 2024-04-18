@@ -60,7 +60,7 @@
                         <li><a href="javascript:;" class="openAll2">고객센터</a>
                             <div class="gnb_depth gnb_depth2_2" style="display: none;">
                                 <ul class="submenu_list">
-                                    <li><a href="notice_list.html">공지사항</a></li>
+                                    <li><a href="/notice_list">공지사항</a></li>
                                     <li><a href="javascript:;">문의하기</a></li>
                                 </ul>
                             </div>
@@ -96,7 +96,7 @@
                 <h2 class="tit_page">TOURIST <span class="in">in</span> TOUR</h2>
                 <p class="location">고객센터 <span class="path">/</span> 공지사항</p>
                 <ul class="page_menu clear">
-                    <li><a href="#" class="on">공지사항</a></li>
+                    <li><a href="/notice_list" class="on">공지사항</a></li>
                     <li><a href="#">문의하기</a></li>
                 </ul>
             </div>

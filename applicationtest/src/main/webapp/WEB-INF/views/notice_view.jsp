@@ -131,6 +131,7 @@
                 </li>
             </ul>
             <p class="btn_line txt_right">
+                <a href="/notice_list" class="btn_bbs">삭제</a>
                 <a href="javascript:;" class="btn_bbs">목록</a>
             </p>
             <ul class="near_list mt20">
