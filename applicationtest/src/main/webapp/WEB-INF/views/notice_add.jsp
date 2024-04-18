@@ -44,7 +44,7 @@
                             <li><a href="/logout">로그아웃</a></li>
                         </c:otherwise>
                     </c:choose>
-                    <li><a href="join.html">회원가입</a></li>
+                    <li><a href="/join">회원가입</a></li>
                 </ul>
                 <nav>
                     <ul class="gnb clear">

@@ -51,11 +51,10 @@ public class NoticeDAO {
         rs.next();
 
         NoticeDTO dto = NoticeDTO.builder()
-                .no(rs.getInt("no"))
                 .title(rs.getString("title"))
-                .content(rs.getString("content"))
-                .count(rs.getInt("count"))
                 .create_date(rs.getDate("create_date"))
+                .count(rs.getInt("count"))
+                .content(rs.getString("content"))
                 .build();
 
         return dto;

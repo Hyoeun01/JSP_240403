@@ -44,7 +44,7 @@
                             <li><a href="/logout">로그아웃</a></li>
                         </c:otherwise>
                     </c:choose>
-                    <li><a href="join.html">회원가입</a></li>
+                    <li><a href="/join">회원가입</a></li>
                 </ul>
                 <nav>
                     <ul class="gnb clear">
@@ -60,7 +60,7 @@
                         <li><a href="javascript:;" class="openAll2">고객센터</a>
                             <div class="gnb_depth gnb_depth2_2" style="display: none;">
                                 <ul class="submenu_list">
-                                    <li><a href="notice_list.html">공지사항</a></li>
+                                    <li><a href="/notice_list">공지사항</a></li>
                                     <li><a href="javascript:;">문의하기</a></li>
                                 </ul>
                             </div>
@@ -96,7 +96,7 @@
                 <h2 class="tit_page">TOURIST <span class="in">in</span> TOUR</h2>
                 <p class="location">고객센터 <span class="path">/</span> 공지사항</p>
                 <ul class="page_menu clear">
-                    <li><a href="#" class="on">공지사항</a></li>
+                    <li><a href="/notice_list" class="on">공지사항</a></li>
                     <li><a href="#">문의하기</a></li>
                 </ul>
             </div>
@@ -106,33 +106,18 @@
         <!-- bodytext_area -->
         <div class="bodytext_area box_inner">
             <ul class="bbsview_list">
-                <li class="bbs_title">박물관 미션 투어 응모 당첨자 발표</li>
-                <li class="bbs_hit">작성일 : <span>2018.08.09</span></li>
-                <li class="bbs_date">조회수 : <span>235</span></li>
+                <li class="bbs_title">${notice.title}</li>
+                <li class="bbs_hit">작성일 : <span>${notice.create_date}</span></li>
+                <li class="bbs_date">조회수 : <span>${notice.count}</span></li>
                 <li class="bbs_content">
                     <div class="editer_content">
-                        안녕하세요. 믿을 수 있는 여행정보, 투어리스트인투어입니다.<br>
-                        박물관 미션투어에 관심과 참여 감사드립니다. <br>
-                        선정되신 분들도 진심으로 축하드립니다. <br>
-                        앞으로도 큰 관심 부탁드리며, 메일로도 안내 예정이니 참고하시기 바랍니다. <br>
-                        감사합니다. <br><br>
-                        [당첨자]<br>
-                        김용* kimyong***@naver.com <br>
-                        인봉* in2018a***@naver.com<br>
-                        예경* yyhong***@naver.com<br>
-                        한진* haha***@naver.com<br>
-                        박수* pky**@naver.com<br>
-                        명진* mma5**@nate.com<br>
-                        김영* rtfg6*@naver.com<br>
-                        서영* seo20**@gmail.com<br>
-                        윤소* yoon2***@naver.com<br>
-                        지은* ji***@daum.net
+                        ${notice.content}
                     </div>
                 </li>
             </ul>
             <p class="btn_line txt_right">
                 <a href="/notice_list" class="btn_bbs">삭제</a>
-                <a href="javascript:;" class="btn_bbs">목록</a>
+                <a href="/notice_list" class="btn_bbs">목록</a>
             </p>
             <ul class="near_list mt20">
                 <li><h4 class="prev">다음글</h4><a href="javascript:;">추석 연휴 티켓/투어 배송 및 직접 수령 안내</a></li>
