@@ -15,12 +15,15 @@ import org.zerock.springex.mapper.TodoMapper;
 // 이 생성자는 클래스의 모든 final 필드 또는 @NonNull 로 표시된 필드를 인자로 받아 초기화
 @RequiredArgsConstructor
 
+
+// 설계도 역할
 public class TodoServiceImpl implements TodoService {
 
     // 의존성 주입이 필요한 객체의 타입을 final로 고정
     private final TodoMapper todoMapper;
     private final ModelMapper modelMapper;
 
+    // 매개변수랑 리턴타입을 확인해야하므로 자동완성으로 오버라이드 하자
     @Override
     public void register(TodoDTO todoDTO) {
         log.info(modelMapper);
