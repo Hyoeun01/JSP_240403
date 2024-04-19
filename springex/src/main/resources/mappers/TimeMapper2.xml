@@ -5,6 +5,7 @@
 <mapper namespace="org.zerock.springex.mapper.TimeMapper2">
 
 <!--    <select>: select문을 실행할거고, resultType:select문의 결과를 어떤타입으로 반환할지-->
+<!--    TimeMapper2의 메서드이름과 xml 내의 id값은 같아야한다-->
     <select id="getNow" resultType="string">
         select now()
     </select>

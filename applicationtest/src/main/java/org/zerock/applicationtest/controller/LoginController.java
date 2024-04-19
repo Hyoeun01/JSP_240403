@@ -14,6 +14,8 @@ import java.io.IOException;
 @Log4j2
 public class LoginController extends HttpServlet {
 
+    // 컨트롤러가 호출하는건 서비스!
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

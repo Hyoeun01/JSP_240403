@@ -9,7 +9,10 @@
     </select>
 
     <insert id="insert">
-        insert into tbl_todo (title, dueDate, writer) values ( #{title}, #{dueDate}, #{writer})
+        -- myBatis는 #을 이용해서 매개변수를 사용한다 (jsp의 $ {} 역할)
+        -- 세미콜론은 생략하기
+        insert into tbl_todo (title, dueDate, writer)
+        values ( #{title}, #{dueDate}, #{writer})
     </insert>
 
 </mapper>
