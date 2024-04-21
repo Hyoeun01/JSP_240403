@@ -43,6 +43,14 @@ public class TodoController {
         log.info("GET todo register...........");
     }
 
+    @GetMapping("/read")
+    public void read(Long tno, Model model) {
+        TodoDTO todoDTO = todoService.getOne(tno);
+        log.info(todoDTO);
+
+        model.addAttribute("dto", todoDTO);
+    }
+
     @PostMapping("/register")
     public String registerPOST(@Valid TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         log.info("POST todo register...........");

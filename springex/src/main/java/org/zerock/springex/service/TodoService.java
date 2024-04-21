@@ -12,4 +12,6 @@ public interface TodoService {
     // TodoMapper가 반환하는 데이터의 타입이 List<TodoVO>이기 때문에
     // List<TodoDTO>로 변환하는 작업이 필요하다
     List<TodoDTO> getAll();
+
+    TodoDTO getOne(Long tno);
 }

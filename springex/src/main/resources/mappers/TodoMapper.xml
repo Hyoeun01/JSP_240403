@@ -22,4 +22,8 @@ JDBC의 ResultSet의 한 행을 어떤 타입의 객체로 만들것인지 지�
         select * from tbl_todo order by tno desc
     </select>
 
+    <select id="selectOne" resultType="org.zerock.springex.domain.TodoVO">
+        select * from tbl_todo where tno = #{tno}
+    </select>
+
 </mapper>

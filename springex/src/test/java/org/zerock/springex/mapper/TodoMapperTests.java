@@ -47,8 +47,13 @@ public class TodoMapperTests {
     public void testSelectAll(){
 
         // 가장 나중에 추가된 데이터가 우선적으로 보인다
-
         List<TodoVO> voList = todoMapper.selectAll();
         voList.forEach(vo-> log.info(vo));
+    }
+
+    @Test
+    public void testSelectOne(){
+        TodoVO todoVO = todoMapper.selectOne(1L);
+        log.info(todoVO);
     }
 }

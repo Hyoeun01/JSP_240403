@@ -12,4 +12,6 @@ public interface TodoMapper {
 
     // 가장 최근에 등록된 TodoVO가 우선적으로 나올 수 있도록 selectAll() 추가하기
     List<TodoVO> selectAll();
+
+    TodoVO selectOne(Long tno);
 }
