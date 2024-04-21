@@ -26,4 +26,8 @@ JDBC의 ResultSet의 한 행을 어떤 타입의 객체로 만들것인지 지�
         select * from tbl_todo where tno = #{tno}
     </select>
 
+    <delete id="delete">
+        delete from tbl_todo where tno = #{tno}
+    </delete>
+
 </mapper>
