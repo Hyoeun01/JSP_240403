@@ -82,14 +82,8 @@
 
                         <script>
 
-                            const serverValidResult = {}
-
-                            <c:forEach items="${errors}" var="error">
-                            serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
-                            </c:forEach>
-
-                            console.log(serverValidResult)
-
+                            document.querySelector(".btn-primary").addEventListener("cleck",function(e){self.location="/todo/modify?tno="+${dto.tno}},false)
+                            document.querySelector(".btn-secondary").addEventListener("cleck",function(e){self.location="/todo/list";},false)
                         </script>
                     </div>
                 </div>
