@@ -30,4 +30,8 @@ JDBC의 ResultSet의 한 행을 어떤 타입의 객체로 만들것인지 지�
         delete from tbl_todo where tno = #{tno}
     </delete>
 
+    <update id="update">
+        update tbl_todo set title = #{title}, dueDate = #{dueDate}, finished = #{finished} where tno = #{tno}
+    </update>
+
 </mapper>
