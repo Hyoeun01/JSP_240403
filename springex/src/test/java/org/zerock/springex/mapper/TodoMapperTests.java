@@ -11,6 +11,12 @@ import org.zerock.springex.domain.TodoVO;
 import java.time.LocalDate;
 
 @Log4j2
+/*  JUnit 5에서 스프링 테스트를 실행할 때 사용되는 어노테이션
+    테스트 클래스 또는 테스트 메서드에 붙여서 사용되며,
+    해당 테스트를 스프링 테스트 컨텍스트와 함께 실행하도록 지시함
+    이를 통해 테스트 클래스나 메서드에서 스프링의 기능 사용 가능
+    보통 스프링 기반의 테스트를 작성할 때 테스트 컨텍스트를 로드하고 의존성 주입 등의 스프링 기능을 활용
+ */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
 public class TodoMapperTests {
