@@ -26,6 +26,10 @@ public class TodoController {
     @RequestMapping("/list")
     public void list(Model model) { // 최종경로 /todo/list
         log.info("todo list............");
+
+        // TodoService를 처리하고 Model에 데이터를 담아서 JSP로 전달해야함
+        // Model에 dtoList라는 이름으로 목록 데이터를 담았으므로 JSP 에서는 JSTL을 이용해서 목록을 출력
+        model.addAttribute("dtoList", todoService.getAll());
     }
 
     /* @RequestMapping(value = "/register", method = RequestMethod.GET) // /todo/register
