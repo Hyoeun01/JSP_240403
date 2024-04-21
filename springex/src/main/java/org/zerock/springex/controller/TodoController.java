@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.springex.dto.TodoDTO;
+import org.zerock.springex.service.TodoService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/todo")
@@ -17,6 +20,8 @@ import org.zerock.springex.dto.TodoDTO;
 @RequiredArgsConstructor
 
 public class TodoController {
+
+    private final TodoService todoService;
 
     @RequestMapping("/list")
     public void list(Model model) { // 최종경로 /todo/list
@@ -35,14 +40,14 @@ public class TodoController {
     }
 
     @PostMapping("/register")
-    public String registerPOST(TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String registerPOST(@Valid TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         log.info("POST todo register...........");
         // 검증에 문제가 있다면 다시 입력화면으로 리다이렉트 되게 함
         if(bindingResult.hasErrors()){
             log.info("has errors,,,,,,,,,,,,,");
 
             // 처리과정에서 잘못된 결과는 RedirectAttributes의 addFlashAttribute()를 이용해서 전달
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            // redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
 
             return "redirect:/todo/register";
         }

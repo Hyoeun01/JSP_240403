@@ -15,4 +15,11 @@
         values ( #{title}, #{dueDate}, #{writer})
     </insert>
 
+<!--    selectAll의 실제 쿼리문 작성.
+select문의 경우 resultType을 반드시 지정.
+JDBC의 ResultSet의 한 행을 어떤 타입의 객체로 만들것인지 지정-->
+    <select id="selectAll" resultType="org.zerock.springex.domain.TodoVO">
+        select * from tbl_todo order by tno desc
+    </select>
+
 </mapper>

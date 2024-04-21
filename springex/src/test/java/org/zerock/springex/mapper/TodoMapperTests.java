@@ -9,6 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.springex.domain.TodoVO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Log4j2
 /*  JUnit 5에서 스프링 테스트를 실행할 때 사용되는 어노테이션
@@ -40,5 +41,14 @@ public class TodoMapperTests {
 
         todoMapper.insert(todoVO);
 
+    }
+
+    @Test
+    public void testSelectAll(){
+
+        // 가장 나중에 추가된 데이터가 우선적으로 보인다
+
+        List<TodoVO> voList = todoMapper.selectAll();
+        voList.forEach(vo-> log.info(vo));
     }
 }
