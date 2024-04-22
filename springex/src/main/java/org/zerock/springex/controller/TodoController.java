@@ -65,6 +65,8 @@ public class TodoController {
         }
         log.info(todoDTO);
 
+        todoService.register(todoDTO);
+
         return "redirect:/todo/list";
     }
 
