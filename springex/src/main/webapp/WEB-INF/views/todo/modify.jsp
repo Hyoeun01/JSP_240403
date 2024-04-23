@@ -83,6 +83,8 @@
                                     <button type="button" class="btn btn-secondary">List</button>
                                 </div>
                             </div>
+                            <input type="hidden" name="page" value="${pageRequestDTO.page}">
+                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
                         </form>
                         <script>
                             const serverValidResult = {}

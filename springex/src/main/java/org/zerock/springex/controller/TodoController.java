@@ -63,11 +63,10 @@ public class TodoController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(Long tno, Model model) {
-        TodoDTO todoDTO = todoService.getOne(tno);
-        log.info(todoDTO);
-
-        model.addAttribute("dto", todoDTO);
+    public void read(Long tno, Model model, PageRequestDTO pageRequestDTO) {
+        // 화면에서 페이지의 정보를 전달하면, 서버에서는 pageRequestDTO 타입으로 받아둔다.
+        // 화면에서 pageRequestDTO 사용
+        model.addAttribute("dto", todoService.getOne(tno));
     }
 
     @PostMapping("/register")
@@ -88,18 +87,22 @@ public class TodoController {
 
         return "redirect:/todo/list";
     }
-
+// 기존의 url 파라미터를 사용하는 메서드 방식은 get방식이었고, post는 폼에 히든으로 숨겨서 전달
     @PostMapping("/remove")
-    public String remove(Long tno, RedirectAttributes redirectAttributes){
+    public String remove(Long tno, RedirectAttributes redirectAttributes, PageRequestDTO pageRequestDTO){
         log.info("-------------------remove--------------");
         log.info("tno : "+tno);
 
         todoService.remove(tno);
+
+        // 페이지와 사이즈 정보를 화면에 전달하기
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
         return "redirect:/todo/list";
     }
 
     @PostMapping("/modify")
-    public String modify(@Valid TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String modify(@Valid TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes,PageRequestDTO pageRequestDTO){
         if(bindingResult.hasErrors()){
             log.info("has errors,,,,,,,,,,,,,,");
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
@@ -108,6 +111,9 @@ public class TodoController {
         }
         log.info(todoDTO);
         todoService.modify(todoDTO);
+        // 페이지와 사이즈 정보를 화면에 전달하기
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage());
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
         return "redirect:/todo/list";
     }
 }
