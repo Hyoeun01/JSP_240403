@@ -19,11 +19,7 @@ public class PageRequestDTO {
     // 목적 > 페이징을 처리하기위해 화면에서 파라미터 정보를 PageRequestDTO 폼에 담아둔다
     // 화면에서 전달한 파라미터를 담아두는 클래스DTO
 
-    private String[] types;
-    private String keyword;
-    private boolean finished;
-    private LocalDate from;
-    private LocalDate to;
+
 
     @Builder.Default
     @Min(1)
@@ -36,6 +32,12 @@ public class PageRequestDTO {
     @Max(value = 100)
     @Positive
     private int size = 10;
+
+    private String[] types;
+    private String keyword;
+    private boolean finished;
+    private LocalDate from;
+    private LocalDate to;
 
     public int getSkip(){
         return (page - 1) * size;
