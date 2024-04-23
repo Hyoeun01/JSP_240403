@@ -77,7 +77,7 @@
         </div>
     </div>
     <div class="row content">
-        <h1>Content</h1>
+
     </div>
     <div class="row footer">
         <%--        <h1>Footer</h1>--%>
