@@ -35,8 +35,14 @@ JDBC의 ResultSet의 한 행을 어떤 타입의 객체로 만들것인지 지�
         update tbl_todo set title = #{title}, dueDate = #{dueDate}, finished = #{finished} where tno = #{tno}
     </update>
 
+<!--    페이징을 위한 sql 구문-->
     <select id="selectList" resultType="org.zerock.springex.domain.TodoVO">
         select * from tbl_todo order by tno desc limit #{skip}, #{size}
+    </select>
+
+<!--    페이징을 위한 전체 갯수 구하는 sql -->
+    <select id="getCount" resultType="int">
+        select count(tno) from tbl_todo
     </select>
 
 </mapper>

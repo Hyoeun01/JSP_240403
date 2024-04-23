@@ -20,5 +20,9 @@ public interface TodoMapper {
 
     void update(TodoVO todoVO);
 
+    // 페이징 관련 메서드 추가 부분
     List<TodoVO> selectList(PageRequestDTO pageRequestDTO);
+
+    // 전체 갯수를 알아야 페이징 나누기 가능하기때문에
+    int getCount(PageRequestDTO pageRequestDTO);
 }
