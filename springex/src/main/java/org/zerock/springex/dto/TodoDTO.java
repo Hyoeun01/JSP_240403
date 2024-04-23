@@ -13,6 +13,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 
 public class TodoDTO {
+
+    // DTO (Data Transfer Object) : 프레이젠테이션 계층 >> 보여주기
+    // 실제 DB에 존재하는 정보보다 적은 양의 정보를 골라서 사용 가능하게 하기
     private Long tno;
 
     @NotEmpty // null, 빈 문자열 불가
