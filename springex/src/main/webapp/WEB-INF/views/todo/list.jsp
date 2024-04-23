@@ -12,6 +12,14 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Hello, world!</title>
+
+    <style>
+        .center-float {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -72,6 +80,14 @@
                             </tbody>
                             <tr></tr>
                         </table>
+<%--                        페이징 부트스트랩 컴포넌트요소 넣기--%>
+                        <div class="center-float">
+                            <ul class="pagination flex-wrap">
+                                <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+                                    <li class="page-item"><a class="page-link" href="#">${num}</a> </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
