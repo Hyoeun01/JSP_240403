@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.springex.dto.PageRequestDTO;
 import org.zerock.springex.dto.TodoDTO;
 import org.zerock.springex.service.TodoService;
 
@@ -26,6 +27,22 @@ public class TodoController {
     private final TodoService todoService;
 
     @RequestMapping("/list")
+    //기존 단순 전체갯수 출력 > 페이징 처리해서, 화면에 전달하는 코드 수정하기
+    //화면에서 전달된 파라미터를 pageRequestDTO가 자동변환해줌
+    // 페이지, 사이즈 등 의 유효성을 검사( 1, 또는 최소, 최대 양수 등 )하고 오류 발생하면 기본페이지로 이동(page=1,size=10)
+    public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) { // 최종경로 /todo/list
+        log.info(pageRequestDTO);
+
+        //에러가 존재한다면 출력후 출력후 리다이렉트
+        if(bindingResult.hasErrors()) {
+            pageRequestDTO=PageRequestDTO.builder().build();
+        }
+
+        // responseDTO안에는 페이징 관련 준비물이 들어있다
+        // 화면에서 responseDTO.page >> 페이지번호 사용가능 -list.jsp
+        model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
+    }
+/*
     public void list(Model model) { // 최종경로 /todo/list
         log.info("todo list............");
 
@@ -33,7 +50,7 @@ public class TodoController {
         // Model에 dtoList라는 이름으로 목록 데이터를 담았으므로 JSP 에서는 JSTL을 이용해서 목록을 출력
         model.addAttribute("dtoList", todoService.getAll());
     }
-
+*/
     /* @RequestMapping(value = "/register", method = RequestMethod.GET) // /todo/register
     public void register(){
         log.info("todo register...........");
