@@ -85,20 +85,42 @@
                             <ul class="pagination flex-wrap">
                                 <c:if test="${responseDTO.prev}">
                                     <li class="page-item">
-                                        <a class="page-link">이전</a>
+                                        <a class="page-link" data-num="${responseDTO.start - 1}">이전</a>
                                     </li>
                                 </c:if>
 
                                 <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
-                                    <li class="page-item ${responseDTO.page == num? "active":""} "><a class="page-link" href="#">${num}</a> </li>
+                                    <li class="page-item ${responseDTO.page == num? "active":""} "><a class="page-link" data-num ="${num}">${num}</a> </li>
                                 </c:forEach>
 
                                 <c:if test="${responseDTO.next}">
                                     <li class="page-item">
-                                        <a class="page-link">다음</a>
+                                        <a class="page-link" data-num="${responseDTO.end + 1}">다음</a>
                                     </li>
                                 </c:if>
                             </ul>
+                            <script>
+                                // pagination 클래스를 이용해서 요소 선택후 이벤트 핸들러 추가
+                                document.querySelector(".pagination").addEventListener("click", function (e) { // e: event
+                                    // 기본적인 기능을 방지하는 함수
+                                    e.preventDefault()
+                                    e.stopPropagation()
+
+                                    const target = e.target
+
+                                    // tagName 이 A가 아니라면 함수를나가고
+                                    if (target.tagName !== 'A') {
+                                        return
+                                    }
+                                    // tagName 이 A이면
+                                    // 현재 페이지의 번호를 가지고오기
+                                    const num = target.getAttribute("data-num")
+
+                                    // 해당 페이지로 이동 > 스프링의 백엔드 서버에 호출하면 서버가 응답해서 해당페이지로 리다이렉트
+                                    // pageRequestDTO에 담아서 호출하면, 서버가 PageResponseDTO에 담아서 화면에 보내고, 화면은 해당 인스턴스 이용해서 화면에 출력
+                                    self.location=`/todo/list?page=\${num}` // 백틱을 이용해서 템플릿 처리
+                                },false)
+                            </script>
                         </div>
                     </div>
                 </div>
