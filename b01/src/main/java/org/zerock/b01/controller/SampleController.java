@@ -1,5 +1,6 @@
 package org.zerock.b01.controller;
 
+import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ public class SampleController {
         model.addAttribute("list", list);
     }
 
+    @ToString
     class SampleDTO{
         private String p1,p2,p3;
         public String getP1() {
@@ -60,5 +62,10 @@ public class SampleController {
         sampleDTO.p3="Value -- p3";
 
         model.addAttribute("dto", sampleDTO);
+    }
+
+    @GetMapping("/ex/ex3")
+    public void ex3(Model model) {
+        model.addAttribute("arr", new String[]{"AAA","BBB","CCC"});
     }
 }

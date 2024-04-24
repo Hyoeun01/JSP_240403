@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout page</title>
+</head>
+<body>
+<div>
+    <h3>Sample Layout Header</h3>
+</div>
+<!--/* 해당영역은 나중에 다른 파일에서 해당 부분만 개발 가능
+새로운 화면을 작성할 때 content와 script중 원하는 영역만 작성하면 됨 */-->
+<div layout:fragment="content">
+    <p>Page content goes here</p>
+</div>
+
+<div>
+    <h3>Sample Layout Footer</h3>
+</div>
+
+<th:block layout:fragment="script" ></th:block>
+
+</body>
+</html>
