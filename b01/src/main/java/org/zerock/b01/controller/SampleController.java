@@ -71,17 +71,14 @@ public class SampleController {
 
     @GetMapping("/ex/ex3_1")
     public void ex3_1(Model model) {
-        model.addAttribute("arr", new String[]{"AAA","BBB","CCC"});
     }
 
     @GetMapping("/ex/ex3_2")
     public void ex3_2(Model model) {
-        model.addAttribute("arr", new String[]{"AAA","BBB","CCC"});
     }
 
     @GetMapping("/ex/ex3_3")
     public void ex3_3(Model model) {
-        model.addAttribute("arr", new String[]{"AAA","BBB","CCC"});
     }
 
 }
