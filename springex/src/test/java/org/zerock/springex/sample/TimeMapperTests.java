@@ -11,7 +11,7 @@ import org.zerock.springex.mapper.TimeMapper;
 @Log4j2
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/root-context.xml")
-public class TimeMappeerTests {
+public class TimeMapperTests {
 
     @Autowired(required=false)
     private TimeMapper timeMapper;

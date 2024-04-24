@@ -5,7 +5,6 @@
   Time: 오전 11:41
   To change this template use File | Settings | File Templates.
 --%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
@@ -83,8 +82,8 @@
                                     <button type="button" class="btn btn-secondary">List</button>
                                 </div>
                             </div>
-                            <input type="hidden" name="page" value="${pageRequestDTO.page}">
-                            <input type="hidden" name="size" value="${pageRequestDTO.size}">
+                            <%--                            <input type="hidden" name="page" value="${pageRequestDTO.page}">--%>
+                            <%--                            <input type="hidden" name="size" value="${pageRequestDTO.size}">--%>
                         </form>
                         <script>
                             const serverValidResult = {}
@@ -92,15 +91,6 @@
                             serverValidResult['${error.getField()}'] = '${error.defaultMessage}'
                             </c:forEach>
                             console.log(serverValidResult)
-
-                            const formObj = document.querySelector("form")
-                            document.querySelector(".btn-danger").addEventListener("click",function(e){
-                                e.preventDefault()
-                                e.stopPropagation()
-                                formObj.action="/todo/remove"
-                                formObj.method="post"
-                                formObj.submit()
-                            },false);
                             document.querySelector(".btn-primary").addEventListener("click", function(e){
                                 e.preventDefault()
                                 e.stopPropagation()
@@ -111,9 +101,16 @@
                             document.querySelector(".btn-secondary").addEventListener("click", function(e){
                                 e.preventDefault()
                                 e.stopPropagation()
-                                self.location = "/todo/list"
+                                self.location = "/todo/list?${pageRequestDTO.link}"
                             }, false)
-
+                            const formObj = document.querySelector("form")
+                            document.querySelector(".btn-danger").addEventListener("click",function(e){
+                                e.preventDefault()
+                                e.stopPropagation()
+                                formObj.action="/todo/remove?${pageRequestDTO.link}"
+                                formObj.method="post"
+                                formObj.submit()
+                            },false)
                         </script>
                     </div>
                 </div>
