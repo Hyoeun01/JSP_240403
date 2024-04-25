@@ -8,4 +8,6 @@ public interface BoardService {
     BoardDTO readOne(Long bno); // 조회작업
 
     void modify(BoardDTO boardDTO); // 수정작업
+
+    void remove(Long bno); // 삭제작업
 }
