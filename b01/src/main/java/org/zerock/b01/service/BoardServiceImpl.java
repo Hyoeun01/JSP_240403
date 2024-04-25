@@ -58,12 +58,16 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public PageResponseDTO<BoardDTO> list(PageRequestDTO pageRequestDTO) {
+
+        // 페이지 , 검색조건 취득
         String[] types = pageRequestDTO.getTypes();
         String keyword = pageRequestDTO.getKeyword();
         Pageable pageable = pageRequestDTO.getPageable("bno");
 
+        // 레포지토리 실행해서 데이터 취득
         Page<Board> result = boardRepository.searchALL(types, keyword, pageable);
 
+        // 보내줄 데이터(VO)들을 DTO로 변환해서 list에 담기
         List<BoardDTO> dtoList = result.getContent().stream()
                 .map(board -> modelMapper.map(board,BoardDTO.class))
                 .collect(Collectors.toList());
