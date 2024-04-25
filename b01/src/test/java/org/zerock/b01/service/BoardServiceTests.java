@@ -27,5 +27,16 @@ public class BoardServiceTests {
         log.info("bno : " +bno);
     }
 
+@Test
+    public void testModify(){
+        //변경에 필요한 데이터만
+    BoardDTO boardDTO = BoardDTO.builder()
+            .bno(201L)
+            .title("update title")
+            .content("update content")
+            .build();
+    boardService.modify(boardDTO);
+}
+
 
 }

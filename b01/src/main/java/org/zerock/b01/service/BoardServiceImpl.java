@@ -15,6 +15,7 @@ import java.util.Optional;
 @Log4j2
 @RequiredArgsConstructor
 @Transactional
+
 public class BoardServiceImpl implements BoardService{
 
     private final ModelMapper modelMapper;
@@ -34,5 +35,13 @@ public class BoardServiceImpl implements BoardService{
         Board board = result.orElseThrow();
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
         return boardDTO;
+    }
+
+    @Override
+    public void modify(BoardDTO boardDTO) {
+        Optional<Board> result = boardRepository.findById(boardDTO.getBno());
+        Board board = result.orElseThrow();
+        board.change(boardDTO.getTitle(), boardDTO.getContent());
+        boardRepository.save(board);
     }
 }
