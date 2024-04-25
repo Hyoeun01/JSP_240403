@@ -68,7 +68,7 @@ public class BoardController {
             log.info("has errors.....");
             String link = pageRequestDTO.getLink();
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-            redirectAttributes.addFlashAttribute("bno",boardDTO.getBno());
+            redirectAttributes.addAttribute("bno",boardDTO.getBno());
 
             return "redirect:/board/modify?"+link;
         }
