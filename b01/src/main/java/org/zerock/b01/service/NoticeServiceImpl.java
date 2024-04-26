@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 @Log4j2
 @RequiredArgsConstructor
 @Transactional
-public class NoticeServiceImpl implements  NoticeService{
-    private final NoticeRepository noticeRepository;
+public class NoticeServiceImpl implements NoticeService {
     private final ModelMapper modelMapper;
+    private final NoticeRepository noticeRepository;
 
     @Override
     public Long register(NoticeDTO noticeDTO) {
@@ -38,11 +38,11 @@ public class NoticeServiceImpl implements  NoticeService{
     }
 
     @Override
-    public void modify(NoticeDTO noticeDTO) {
-        Optional<Notice> result = noticeRepository.findById(noticeDTO.getNo());
-        Notice notice = result.orElseThrow();
-        notice.change(noticeDTO.getTitle(), noticeDTO.getContent());
-        noticeRepository.save(notice);
+    public void modify(NoticeDTO dto) {
+        Optional<Notice> result = noticeRepository.findById(dto.getNo());
+        Notice vo = result.orElseThrow();
+        vo.change(dto.getTitle(), dto.getContent());
+        noticeRepository.save(vo);
     }
 
     @Override
@@ -52,11 +52,10 @@ public class NoticeServiceImpl implements  NoticeService{
 
     @Override
     public List<NoticeDTO> list(PageRequestDTO pageRequestDTO) {
-
-        List<NoticeDTO> result = noticeRepository.findAll().stream()
-                .map(notice->modelMapper.map(notice, NoticeDTO.class))
-                .collect(Collectors.toList());
-
+        List<NoticeDTO> result =
+                noticeRepository.findAll().stream()
+                        .map(notice->modelMapper.map(notice,NoticeDTO.class))
+                        .collect(Collectors.toList());
         return result;
     }
 }
