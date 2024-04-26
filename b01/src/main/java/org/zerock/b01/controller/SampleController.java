@@ -123,7 +123,19 @@ public class SampleController {
     }
 
     @GetMapping("/ex/notice_add")
-    public void notice_add(Model model) {
+    public void addGet() {
+    }
+
+    @PostMapping("/ex/notice_add")
+    public String addPost(@Valid NoticeDTO noticeDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        System.out.println(noticeDTO);
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            return "redirect:/ex/notice_add";
+        }
+        Long no = noticeService.register(noticeDTO);
+        redirectAttributes.addFlashAttribute("result",no);
+        return "redirect:/ex/notice_list";
     }
     @GetMapping("/ex/program")
     public void program(Model model) {
