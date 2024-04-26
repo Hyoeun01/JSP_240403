@@ -93,7 +93,8 @@ public class SampleController {
     }
 
     @GetMapping({"/ex/notice_view","/ex/notice_modify"})
-    public void notice_view(Long no,Model model) {
+    public void notice_view(Long no,PageRequestDTO pageRequestDTO,Model model) {
+        System.out.println(no);
         model.addAttribute("notice", noticeService.readOne(no));
     }
 
@@ -111,6 +112,13 @@ public class SampleController {
         noticeService.modify(noticeDTO);
         redirectAttributes.addFlashAttribute("result","modified");
         redirectAttributes.addAttribute("no",noticeDTO.getNo());
+        return "redirect:/ex/notice_list";
+    }
+
+    @PostMapping("/ex/notice_remove")
+    public String remove(Long no, RedirectAttributes redirectAttributes) {
+        noticeService.remove(no);
+        redirectAttributes.addFlashAttribute("result","removed");
         return "redirect:/ex/notice_list";
     }
 
