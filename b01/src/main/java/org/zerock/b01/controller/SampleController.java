@@ -1,11 +1,15 @@
 package org.zerock.b01.controller;
 
+import jakarta.validation.Valid;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.b01.dto.NoticeDTO;
 import org.zerock.b01.dto.PageRequestDTO;
 import org.zerock.b01.service.NoticeService;
@@ -87,11 +91,31 @@ public class SampleController {
     public void notice_list(PageRequestDTO pageRequestDTO, Model model) {
         model.addAttribute("noticeList", noticeService.list(pageRequestDTO)) ;
     }
+
+    @GetMapping({"/ex/notice_view","/ex/notice_modify"})
+    public void notice_view(Long no,Model model) {
+        model.addAttribute("notice", noticeService.readOne(no));
+    }
+
+    @PostMapping("/ex/notice_modify")
+    public String modify(PageRequestDTO pageRequestDTO, @Valid NoticeDTO noticeDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        log.info("notice post modify..."+noticeDTO);
+        if(bindingResult.hasErrors()) {
+            log.info("has errors..");
+            String link = pageRequestDTO.getLink();
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+            redirectAttributes.addAttribute("no",noticeDTO.getNo());
+
+            return "redirect:/ex/notice_modify?"+link;
+        }
+        noticeService.modify(noticeDTO);
+        redirectAttributes.addFlashAttribute("result","modified");
+        redirectAttributes.addAttribute("no",noticeDTO.getNo());
+        return "redirect:/ex/notice_list";
+    }
+
     @GetMapping("/ex/notice_add")
     public void notice_add(Model model) {
-    }
-    @GetMapping("/ex/notice_view")
-    public void notice_view(Model model) {
     }
     @GetMapping("/ex/program")
     public void program(Model model) {
