@@ -20,10 +20,9 @@ public NoticeSearchImpl() {
         QNotice notice = QNotice.notice;
         JPQLQuery<Notice> query = from(notice);
         query.where(notice.title.contains("1"));
+        this.getQuerydsl().applyPagination(pageable, query);
         List<Notice> list = query.fetch();
-
         long count = query.fetchCount();
-
         return null;
     }
 

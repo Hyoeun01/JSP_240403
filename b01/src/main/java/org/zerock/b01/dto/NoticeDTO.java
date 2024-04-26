@@ -15,7 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class NoticeDTO {
     private Long no;
+
+    @NotEmpty
     private String title;
+    @NotEmpty
     private String content;
 
     @Builder.Default
