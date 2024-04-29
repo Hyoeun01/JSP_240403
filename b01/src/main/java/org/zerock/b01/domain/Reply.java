@@ -18,6 +18,10 @@ public class Reply extends BaseEntity{
     // 댓글번호, 자동 증가(오토 인크리먼트)
     private Long rno;
 
+    //  if (Reply : Many) To <- (Board : One) ---- 단방향
+    // ( 양방향이 된다 )
+    // 장점 - 서로간 참조 가능 / 단점 - 구조가 복잡해짐
+
     // (Reply : Many) -> To (Board : One) : 단방향 참조
     // 장점 : 설정이 쉽고 간단함
     // 단점 : 서로간 참조가 어려움 >> 조인 설정을 이용하면 해소가 가능하다
