@@ -20,6 +20,6 @@ public class ReplyServiceTests {
                 .bno(100L)
                 .build();
 
-        log.info(replyService.register(replyDTO));
+        log.info("댓글 등록하고 댓글 번호 리턴하기 : "+replyService.register(replyDTO));
     }
 }
