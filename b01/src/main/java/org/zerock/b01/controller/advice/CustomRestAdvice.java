@@ -33,6 +33,7 @@ public class CustomRestAdvice {
     }
 
     // 실행시점에 오류코드 등 로그 기록하는 설정
+    // 사용할 수 없는 bno로 작성시 발생하는 예외 처리하기
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
     public ResponseEntity<Map<String,String>> handleFKExction(Exception e) {
