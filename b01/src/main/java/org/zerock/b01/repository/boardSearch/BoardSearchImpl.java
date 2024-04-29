@@ -8,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.zerock.b01.domain.Board;
 import org.zerock.b01.domain.QBoard;
+import org.zerock.b01.domain.QReply;
+import org.zerock.b01.domain.Reply;
+import org.zerock.b01.dto.BoardListReplyCountDTO;
 
 import java.util.List;
 
@@ -65,5 +68,18 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         long count = query.fetchCount();
         // <> 아무거나 다넣어줄수있음.
         return new PageImpl<>(list, pageable,count);
+    }
+
+    @Override
+    public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable) {
+        QBoard board = QBoard.board;
+        QReply reply = QReply.reply;
+
+        JPQLQuery<Board> query = from(board);
+        query.leftJoin(reply).on(reply.board.eq(board));
+
+        query.groupBy(board);
+
+        return null;
     }
 }

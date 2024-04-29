@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+// 댓글 게시글 조회시 인덱시 이용해서 성능을 개선함
+@Table(name = "Reply" , indexes = {@Index(name = "idx_reply_board_bno", columnList = "board_bno")})
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "board")
+@ToString
 public class Reply extends BaseEntity{
 
     @Id
