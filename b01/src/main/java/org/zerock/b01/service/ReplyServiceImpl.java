@@ -56,13 +56,18 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public PageResponseDTO<ReplyDTO> getListOfBoard(Long bno, PageRequestDTO pageRequestDTO) {
+        // PageRequestDTO : 화면에서 백엔드로 보내는 페이징 정보가 들어있음. 현재페이지나 크기 등
+        // 페이징 하기위한 준비물 정보
         Pageable pageable = PageRequest.of(pageRequestDTO.getPage() <= 0? 0 : pageRequestDTO.getPage() - 1, pageRequestDTO.getSize(), Sort.by("rno").ascending());
 
+        // 페이징 처리가 된 댓글의 목록들 조회
         Page<Reply> result = replyRepository.listOfBoard(bno, pageable);
 
+        // 스트림(병렬처리) >> 여러개의 댓글 내용의 타입을 entity에서 DTO타입으로 변환해서 다시 List로 담기
         List<ReplyDTO> dtoList = result.getContent().stream().map(reply -> modelMapper.map(reply, ReplyDTO.class))
                 .collect(Collectors.toList());
 
+        // 서버에서 페이징 처리 후 화면으로 전달해주기 > PageResponseDTO 로 응답
         return PageResponseDTO.<ReplyDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
