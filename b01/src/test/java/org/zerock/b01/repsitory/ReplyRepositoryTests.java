@@ -40,8 +40,8 @@ public class ReplyRepositoryTests {
     }
 
     // 댓글 페이징 처리 조회 리스트
-    @Test
     @Transactional
+    @Test
     public void testBoardReplies() {
         // 이 번호의 게시글의 댓글 목록을 페이징 처리해서 조회함
         Long bno = 100L;

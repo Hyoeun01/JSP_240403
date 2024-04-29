@@ -13,9 +13,9 @@ import lombok.*;
 @ToString
 public class Reply extends BaseEntity{
 
+    // 댓글번호, 자동 증가(오토 인크리먼트)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // 댓글번호, 자동 증가(오토 인크리먼트)
     private Long rno;
 
     //  if (Reply : Many) To <- (Board : One) ---- 단방향
