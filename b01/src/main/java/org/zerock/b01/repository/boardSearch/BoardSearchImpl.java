@@ -72,19 +72,23 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     }
 
     @Override
+    // 댓글의 개수와 함께 검색하기
     public Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable) {
+        // @Query안에 문자열, sql문법을 사용시 컴파일 체크가 안되기때문에 QueryDSL을 동적으로 사용하면 자바 문법 형식으로 데이터베이스타입으로 변환이 쉽다
         // QueryDSL의 QDomain 사용하기
-
         QBoard board = QBoard.board;
         QReply reply = QReply.reply;
 
+        // JPQL문법 사용할게
         JPQLQuery<Board> query = from(board);
+        // 조인한다
         query.leftJoin(reply).on(reply.board.eq(board));
 
         query.groupBy(board);
 
-        // 544p 코드 추가하기
+        // 544p 코드 추가하기 ( 중복되어서 위에서 긁어옴 )
         if((types != null && types.length > 0) && keyword != null){
+            // true,false 를 갖는다
             BooleanBuilder booleanBuilder = new BooleanBuilder();
             for (String type : types) {
                 switch(type) {
@@ -107,6 +111,8 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         // AND bno>0 : WHERE 쿼리 추가
         query.where(board.bno.gt(0L));
 
+        // 추가부분
+        // Projections를 이용해서 Entity 클래스를 자동으로 DTO타입으로 형변환
         JPQLQuery<BoardListReplyCountDTO> dtoQuery = query.select(Projections.bean(BoardListReplyCountDTO.class, board.bno, board.title, board.writer,board.regDate, reply.count().as("replyCount")));
 
         this.getQuerydsl().applyPagination(pageable, dtoQuery);
