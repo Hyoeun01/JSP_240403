@@ -73,6 +73,17 @@ public class ReplyController {
         replyService.remove(rno);
         Map<String, Long> resultMap = new HashMap<>();
         resultMap.put("rno", rno);
+        //resultMap.remove("rno",rno);
+        return resultMap;
+    }
+
+    @Tag(name="Modify reply", description = "put방식으로 댓글 수정하기")
+    @PutMapping(value = "/{rno}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String,Long> modify(@PathVariable("rno") Long rno, @RequestBody ReplyDTO replyDTO) {
+        replyDTO.setRno(rno); // 번호 일치
+        replyService.modify(replyDTO);
+        Map<String, Long> resultMap = new HashMap<>();
+        resultMap.put("rno", rno);
         return resultMap;
     }
 
