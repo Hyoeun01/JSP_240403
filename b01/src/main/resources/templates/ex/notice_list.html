@@ -22,12 +22,12 @@
             <fieldset>
                 <legend>검색</legend>
                 <input type="text" name="keyword" class="tbox" th:value="${pageRequestDTO.keyword}" title="검색어를 입력해주세요" placeholder="검색어를 입력해주세요">
-                <button class="btn_srch" type="submit">검색</button>
-                <a href="/ex/notice_add" class="btn_srch">글쓰기</a>
+                <button type="submit" class="btn_srch">검색</button>
+                <a href="/ex/notice_add" class="btn_srch">등록</a>
             </fieldset>
         </form>
         <table class="bbsListTbl" summary="번호,제목,조회수,작성일 등을 제공하는 표">
-            <caption class="hdd">공지사항 목록</caption>
+            <caption class="hdd">공지사항  목록</caption>
             <thead>
             <tr>
                 <th scope="col">번호</th>
@@ -39,17 +39,13 @@
             <tbody th:with="link = ${pageRequestDTO.getLink()}">
             <tr th:each="notice:${responseDTO.dtoList}">
                 <td th:text="${notice.no}"></td>
-                <td class="tit_notice"><a
-                        th:href="|@{/ex/notice_view(no=${notice.no})}&${link}|">[[${notice.title}]]</a></td>
+                <td class="tit_notice"><a th:href="|@{/ex/notice_view(no=${notice.no})}&${link}|">[[${notice.title}]]</a> </td>
                 <td>[[${notice.count}]]</td>
                 <td>[[${#temporals.format(notice.regDate, 'yyyy-MM-dd')}]]</td>
             </tr>
-
             </tbody>
         </table>
-        <!-- pagination -->
-
-        <div class="float-end">
+        <!--<div class="float-end">
             <ul class="pagination flex-wrap">
                 <li class="page-item" th:if="${responseDTO.prev}">
                     <a class="page-link" th:data-num="${responseDTO.start -1}">이전</a>
@@ -63,23 +59,35 @@
                     <a class="page-link" th:data-num="${responseDTO.end +1}">다음</a>
                 </li>
             </ul>
+        </div>-->
+        <div class="pagination">
+            <a href="javascript:;" th:if="${responseDTO.prev}"  class="prevpage pbtn">
+                <img th:data-num="${responseDTO.start -1}" src="/img/btn_prevpage.png" alt="이전페이지로 이동"></a>
+            <th:block th:each="i:${#numbers.sequence(responseDTO.start,responseDTO.end)}">
+                <a href="javascript:;">
+                    <span th:data-num="${i}" th:class="${responseDTO.page==i}?'pagenum currentpage':'pagenum'">[[${i}]]</span>
+                </a>
+            </th:block>
+            <a href="javascript:;" th:if="${responseDTO.next}"  class="nextpage pbtn">
+                <img th:data-num="${responseDTO.end +1}" src="/img/btn_nextpage.png" alt="다음페이지로 이동"></a>
         </div>
-
     </div>
 </div>
+
 <script layout:fragment="script" th:inline="javascript">
-    document.querySelector(".pagination").addEventListener("click", function (e) {
+    document.querySelector(".pagination").addEventListener("click", function (e){
         e.preventDefault()
         e.stopPropagation()
 
         const target = e.target
-        if (target.tagName !== 'A') {
-            return
+        // if(target.tagName !== 'A') {
+        if(target.tagName == 'SPAN' || target.tagName == 'IMG'){
+            const num = target.getAttribute("data-num")
+            const formObj = document.querySelector("form")
+            formObj.innerHTML += ` <input type='hidden' name='page' value='${num}'>`
+            formObj.submit();
         }
-        const num = target.getAttribute("data-num")
-        const formObj = document.querySelector("form")
-        formObj.innerHTML += ` <input type='hidden' name='page' value='${num}'>`
-        formObj.submit();
+
     }, false)
 </script>
 </html>
