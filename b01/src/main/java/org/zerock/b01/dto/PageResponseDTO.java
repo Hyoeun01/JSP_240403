@@ -19,6 +19,8 @@ public class PageResponseDTO<E> {
     private boolean prev;
     private boolean next;
 
+    private int last;
+
     private List<E> dtoList;
 
     @Builder(builderMethodName = "withAll")
@@ -35,7 +37,7 @@ public class PageResponseDTO<E> {
         this.end=(int)(Math.ceil(this.page/10.0)) * 10;
         this.start = this.end -9;
 
-        int last = (int)(Math.ceil((total/(double)size)));
+        this.last = (int)(Math.ceil((total/(double)size)));
 
         this.end = end > last ? last : end;
 

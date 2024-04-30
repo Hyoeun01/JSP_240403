@@ -61,6 +61,7 @@
             </ul>
         </div>-->
         <div class="pagination">
+            <a href="javascript:;" class="firstpage pbtn"><img src="/img/btn_firstpage.png" th:data-num="1" alt="처음 페이지로 이동"></a>
             <a href="javascript:;" th:if="${responseDTO.prev}"  class="prevpage pbtn">
                 <img th:data-num="${responseDTO.start -1}" src="/img/btn_prevpage.png" alt="이전페이지로 이동"></a>
             <th:block th:each="i:${#numbers.sequence(responseDTO.start,responseDTO.end)}">
@@ -70,6 +71,7 @@
             </th:block>
             <a href="javascript:;" th:if="${responseDTO.next}"  class="nextpage pbtn">
                 <img th:data-num="${responseDTO.end +1}" src="/img/btn_nextpage.png" alt="다음페이지로 이동"></a>
+            <a href="javascript:;" class="lastpage pbtn"><img th:if="${responseDTO.next}" th:data-num="${responseDTO.last}" src="/img/btn_lastpage.png" alt="마지막 페이지로 이동"></a>
         </div>
     </div>
 </div>
