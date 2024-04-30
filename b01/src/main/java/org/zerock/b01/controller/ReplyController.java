@@ -5,7 +5,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -73,7 +72,7 @@ public class ReplyController {
         replyService.remove(rno);
         Map<String, Long> resultMap = new HashMap<>();
         resultMap.put("rno", rno);
-        //resultMap.remove("rno",rno);
+
         return resultMap;
     }
 

@@ -1,7 +1,9 @@
 package org.zerock.b01.repository.noticeSearch;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.zerock.b01.domain.Notice;
@@ -15,15 +17,24 @@ public NoticeSearchImpl() {
 }
 
     @Override
-    public Page<Notice> search1(Pageable pageable) {
+    public Page<Notice> searchOne(String keyword,Pageable pageable) {
 
         QNotice notice = QNotice.notice;
         JPQLQuery<Notice> query = from(notice);
-        query.where(notice.title.contains("1"));
+
+        BooleanBuilder booleanBuilder = new BooleanBuilder();
+
+        if(keyword != null) {
+            booleanBuilder.or(notice.title.contains(keyword));
+            booleanBuilder.or(notice.content.contains(keyword));
+            query.where(booleanBuilder);
+        }
+
+        query.where(notice.no.gt(0L));
         this.getQuerydsl().applyPagination(pageable, query);
         List<Notice> list = query.fetch();
         long count = query.fetchCount();
-        return null;
+        return new PageImpl<>(list, pageable, count);
     }
 
 

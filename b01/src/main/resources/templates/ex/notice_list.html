@@ -27,7 +27,7 @@
             </fieldset>
         </form>
         <table class="bbsListTbl" summary="번호,제목,조회수,작성일 등을 제공하는 표">
-            <caption class="hdd">공지사항  목록</caption>
+            <caption class="hdd">공지사항 목록</caption>
             <thead>
             <tr>
                 <th scope="col">번호</th>
@@ -39,7 +39,7 @@
             <tbody>
             <tr th:each="notice:${noticeList}">
                 <td th:text="${notice.no}"></td>
-                <td class="tit_notice"><a th:href="|@{/ex/notice_view(no=${notice.no})}|">[[${notice.title}]]</a> </td>
+                <td class="tit_notice"><a th:href="|@{/ex/notice_view(no=${notice.no})}|">[[${notice.title}]]</a></td>
                 <td>[[${notice.count}]]</td>
                 <td>[[${#temporals.format(notice.regDate, 'yyyy-MM-dd')}]]</td>
             </tr>
@@ -47,16 +47,20 @@
             </tbody>
         </table>
         <!-- pagination -->
-        <div class="pagination">
-            <a href="javascript:;" class="firstpage  pbtn"><img src="/img/btn_firstpage.png" alt="첫 페이지로 이동"></a>
-            <a href="javascript:;" class="prevpage  pbtn"><img src="/img/btn_prevpage.png" alt="이전 페이지로 이동"></a>
-            <a href="javascript:;"><span class="pagenum currentpage">1</span></a>
-            <a href="javascript:;"><span class="pagenum">2</span></a>
-            <a href="javascript:;"><span class="pagenum">3</span></a>
-            <a href="javascript:;"><span class="pagenum">4</span></a>
-            <a href="javascript:;"><span class="pagenum">5</span></a>
-            <a href="javascript:;" class="nextpage  pbtn"><img src="/img/btn_nextpage.png" alt="다음 페이지로 이동"></a>
-            <a href="javascript:;" class="lastpage  pbtn"><img src="/img/btn_lastpage.png" alt="마지막 페이지로 이동"></a>
+        <div class="float-end">
+            <ul class="pagination flex-wrap">
+                <li class="page-item" th:if="${responseDTO.prev}">
+                    <a class="page-link" th:data-num="${responseDTO.start -1}">이전</a>
+                </li>
+                <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                    <li th:class="${responseDTO.page == i}?'page-item active':'page-item'">
+                        <a class="page-link" th:data-num="${i}">[[${i}]]</a>
+                    </li>
+                </th:block>
+                <li class="page-item" th:if="${responseDTO.next}">
+                    <a class="page-link" th:data-num="${responseDTO.end +1}">다음</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

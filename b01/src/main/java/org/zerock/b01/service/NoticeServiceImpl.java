@@ -4,10 +4,13 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.zerock.b01.domain.Notice;
 import org.zerock.b01.dto.NoticeDTO;
 import org.zerock.b01.dto.PageRequestDTO;
+import org.zerock.b01.dto.PageResponseDTO;
 import org.zerock.b01.repository.NoticeRepository;
 
 import java.util.List;
@@ -51,11 +54,23 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public List<NoticeDTO> list(PageRequestDTO pageRequestDTO) {
-        List<NoticeDTO> result =
-                noticeRepository.findAll().stream()
-                        .map(notice->modelMapper.map(notice,NoticeDTO.class))
-                        .collect(Collectors.toList());
-        return result;
+    public PageResponseDTO<NoticeDTO> list(PageRequestDTO pageRequestDTO) {
+
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<Notice> result = noticeRepository.searchOne(keyword,pageable);
+
+        List<NoticeDTO> dtoList = result.getContent().stream()
+                .map(notice -> modelMapper.map(notice,NoticeDTO.class))
+                .collect(Collectors.toList());
+
+        return PageResponseDTO.<NoticeDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total((int)result.getTotalElements())
+                .build();
     }
+
+
 }

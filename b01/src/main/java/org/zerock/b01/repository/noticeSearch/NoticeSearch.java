@@ -5,6 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.zerock.b01.domain.Notice;
 
 public interface NoticeSearch {
-    Page<Notice> search1(Pageable pageable);
+    Page<Notice> searchOne(String keyword,Pageable pageable);
 
 }
