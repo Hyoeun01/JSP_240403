@@ -18,12 +18,12 @@
 
     <!-- bodytext_area -->
     <div class="bodytext_area box_inner">
-        <form action="#" class="minisrch_form">
+        <form action="/ex/notice_list" method="get" class="minisrch_form">
             <fieldset>
                 <legend>검색</legend>
-                <input type="text" class="tbox" title="검색어를 입력해주세요" placeholder="검색어를 입력해주세요">
-                <a href="javascript:;" class="btn_srch">검색</a>
-                <a href="/ex/notice_add" class="btn_srch">등록</a>
+                <input type="text" name="keyword" class="tbox" th:value="${pageRequestDTO.keyword}" title="검색어를 입력해주세요" placeholder="검색어를 입력해주세요">
+                <button class="btn_srch" type="submit">검색</button>
+                <a href="/ex/notice_add" class="btn_srch">글쓰기</a>
             </fieldset>
         </form>
         <table class="bbsListTbl" summary="번호,제목,조회수,작성일 등을 제공하는 표">
@@ -36,10 +36,11 @@
                 <th scope="col">작성일</th>
             </tr>
             </thead>
-            <tbody>
-            <tr th:each="notice:${noticeList}">
+            <tbody th:with="link = ${pageRequestDTO.getLink()}">
+            <tr th:each="notice:${responseDTO.dtoList}">
                 <td th:text="${notice.no}"></td>
-                <td class="tit_notice"><a th:href="|@{/ex/notice_view(no=${notice.no})}|">[[${notice.title}]]</a></td>
+                <td class="tit_notice"><a
+                        th:href="|@{/ex/notice_view(no=${notice.no})}&${link}|">[[${notice.title}]]</a></td>
                 <td>[[${notice.count}]]</td>
                 <td>[[${#temporals.format(notice.regDate, 'yyyy-MM-dd')}]]</td>
             </tr>
@@ -47,6 +48,7 @@
             </tbody>
         </table>
         <!-- pagination -->
+
         <div class="float-end">
             <ul class="pagination flex-wrap">
                 <li class="page-item" th:if="${responseDTO.prev}">
@@ -62,6 +64,22 @@
                 </li>
             </ul>
         </div>
+
     </div>
 </div>
+<script layout:fragment="script" th:inline="javascript">
+    document.querySelector(".pagination").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+        if (target.tagName !== 'A') {
+            return
+        }
+        const num = target.getAttribute("data-num")
+        const formObj = document.querySelector("form")
+        formObj.innerHTML += ` <input type='hidden' name='page' value='${num}'>`
+        formObj.submit();
+    }, false)
+</script>
 </html>

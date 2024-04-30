@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.b01.dto.NoticeDTO;
 import org.zerock.b01.dto.PageRequestDTO;
+import org.zerock.b01.dto.PageResponseDTO;
 import org.zerock.b01.service.NoticeService;
 
 import java.util.Arrays;
@@ -89,7 +90,9 @@ public class SampleController {
     }
     @GetMapping("/ex/notice_list")
     public void notice_list(PageRequestDTO pageRequestDTO, Model model) {
-        model.addAttribute("noticeList", noticeService.list(pageRequestDTO)) ;
+        PageResponseDTO<NoticeDTO> responseDTO = noticeService.list(pageRequestDTO);
+        model.addAttribute("responseDTO", responseDTO) ;
+
     }
 
     @GetMapping({"/ex/notice_view","/ex/notice_modify"})
