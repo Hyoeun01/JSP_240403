@@ -20,7 +20,7 @@
     <div class="bodytext_area place_area box_inner">
         <ul class="program_list clear">
             <li th:each="program:${programList}">
-                <img class="img_place" th:src="@{/img/${program.img}}" th:alt="${program.title}" />
+                <img class="img_place" th:src="@{'/img/'+${program.img}}" th:alt="${program.title}" />
                 <h3>[[${program.title}]]</h3>
                 <p class="subttl">[[${program.schedule}]]</p>
                 <div class="program_content">
