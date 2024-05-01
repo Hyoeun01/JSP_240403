@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
+import java.io.File;
 import java.time.LocalDate;
 
 @ToString
@@ -28,4 +29,6 @@ public class TodoDTO {
 
     @NotEmpty
     private String writer; // 새로 추가됨!
+
+    private String file;
 }

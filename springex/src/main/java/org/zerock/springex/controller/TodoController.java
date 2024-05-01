@@ -8,12 +8,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.springex.dto.PageRequestDTO;
 import org.zerock.springex.dto.TodoDTO;
 import org.zerock.springex.service.TodoService;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 
 // 파일 추가 확인중
 
@@ -70,8 +73,13 @@ public class TodoController {
     }
 
     @PostMapping("/register")
-    public String registerPOST(@Valid TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+    public String registerPOST(MultipartFile file, @Valid TodoDTO todoDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
         log.info("POST todo register...........");
+        log.info(file.getOriginalFilename()); // 실제 파일 이름 출력하기
+        log.info(file.getSize()); // 파일의 크기 출력
+        log.info(file.getContentType()); // 파일의 확장자
+
+        file.transferTo(new File("c://files//"+file.getOriginalFilename())); // 파일을 저장하는 메서드. new File("파일을 저장할 경로//파일이름.확장자")
         // 검증에 문제가 있다면 다시 입력화면으로 리다이렉트 되게 함
         if(bindingResult.hasErrors()){
             log.info("has errors,,,,,,,,,,,,,");

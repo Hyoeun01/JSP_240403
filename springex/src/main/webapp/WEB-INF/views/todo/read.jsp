@@ -64,8 +64,13 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">Writer</span>
-                            <input type="text" name="" class="form-control"
+                            <input type="text" name="writer" class="form-control"
                                    value='<c:out value="${dto.writer}"></c:out>' readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Image</span>
+                            <input type="file" name="file" class="form-control"
+                                   value='<c:out value="${dto.image}"></c:out>' readonly>
                         </div>
                         <div class="form-check">
                             <label class="form-check-label">

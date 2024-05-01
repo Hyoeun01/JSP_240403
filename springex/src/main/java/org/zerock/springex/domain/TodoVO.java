@@ -3,6 +3,7 @@ package org.zerock.springex.domain;
 
 import lombok.*;
 
+import java.io.File;
 import java.time.LocalDate;
 
 @Getter
@@ -20,4 +21,5 @@ public class TodoVO {
     private LocalDate dueDate;
     private String writer;
     private boolean finished;
+    private String file;
 }

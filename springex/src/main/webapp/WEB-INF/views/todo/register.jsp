@@ -48,7 +48,7 @@
                         Featured
                     </div>
                     <div class="card-body">
-                        <form action="/todo/register" method="post">
+                        <form action="/todo/register" method="post" enctype="multipart/form-data">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Title</span>
                                 <input type="text" name="title" class="form-control" placeholder="Title">
@@ -60,6 +60,10 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Writer</span>
                                 <input type="text" name="writer" class="form-control" placeholder="Writer">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Image</span>
+                                <input type="file" name="file" class="form-control" placeholder="image">
                             </div>
                             <div class="my-4">
                                 <div class="float-end">
