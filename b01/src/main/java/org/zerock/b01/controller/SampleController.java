@@ -135,7 +135,5 @@ public class SampleController {
         redirectAttributes.addFlashAttribute("result",no);
         return "redirect:/ex/notice_list";
     }
-    @GetMapping("/ex/program")
-    public void program(Model model) {
-    }
+
 }

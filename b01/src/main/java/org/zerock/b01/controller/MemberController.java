@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.b01.dto.MemberDTO;
 import org.zerock.b01.service.MemberService;
 
@@ -40,13 +41,20 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String loginMember(String member_id, String member_pw, HttpServletRequest req) {
+    public String loginMember(String member_id, String member_pw, HttpServletRequest req, RedirectAttributes redirectAttributes) {
 
-        MemberDTO loginInfo = memberService. login(member_id, member_pw);
-        HttpSession session = req.getSession();
-        session.setAttribute("loginInfo", loginInfo);
+        try{
+            MemberDTO loginInfo = memberService. login(member_id, member_pw);
+            HttpSession session = req.getSession();
+            session.setAttribute("loginInfo", loginInfo);
 
-        return "redirect:/ex/index";
+            return "redirect:/ex/index";
+        } catch (Exception e){
+            redirectAttributes.addFlashAttribute("error", "아이디와 비밀번호를 확인해주세요...");
+            return "redirect:/member/login";
+        }
+
+
     }
 
     @GetMapping("/logout")

@@ -41,7 +41,9 @@
 
             <div class="login_wrap">
                 <h1 class="loginTit"><a href="/ex/index"><img src="/img/tit_login.png" alt="TOURIST IN TOUR" /></a></h1>
+
                 <ul class="login_list">
+                    <li th:if="${error != null}" style="text-align: center; font-size: 20px">[[${error}]]</li>
                     <li><input type="text" name="member_id" size="32"></li>
                     <li><input type="password" name="member_pw" size="32"></li>
                     <li><button type="submit" class="btn_srch">로그인</button></li>
