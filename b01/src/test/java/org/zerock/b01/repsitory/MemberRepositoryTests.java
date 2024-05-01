@@ -18,12 +18,13 @@ public class MemberRepositoryTests {
     @Test
     public void testInsert(){
         Member member = Member.builder()
-                .member_id("test1")
+                .member_id("test3")
                 .member_pw("1234")
                 .name("testuser1")
                 .phone("010-1234-5678")
                 .email1("test")
                 .email2("naver.com")
+                .gender("male")
                 .agree(true)
                 .build();
 
