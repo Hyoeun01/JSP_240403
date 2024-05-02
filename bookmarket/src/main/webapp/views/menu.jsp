@@ -10,8 +10,16 @@
 		<div>
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
+					<c:choose>
+						<c:when test="${empty loginInfo}">
 					<a class="nav-link"
 					   href="<c:url value="/member/login"/>">로그인</a>
+						</c:when>
+						<c:otherwise>
+							<a class="nav-link"
+							   href="<c:url value="/member/logout"/>">로그아웃</a>
+						</c:otherwise>
+					</c:choose>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link"

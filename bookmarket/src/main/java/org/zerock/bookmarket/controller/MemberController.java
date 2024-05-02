@@ -11,6 +11,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.bookmarket.dto.MemberDTO;
 import org.zerock.bookmarket.service.MemberService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -45,8 +47,21 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String loginPost(@Valid MemberDTO memberDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws Exception{
-        
+    public String loginMember(MemberDTO memberDTO, HttpServletRequest req, RedirectAttributes redirectAttributes) {
+        log.info("a00sdf");
+        try{
+            HttpSession session = req.getSession();
+            session.setAttribute("loginInfo",  memberService.login(memberDTO));
+
+        } catch (Exception e){
+            e.printStackTrace();
+            // redirectAttributes.addFlashAttribute("error", "아이디와 비밀번호를 확인해주세요...");
+            return "redirect:/member/login?error=fail";
+        }
+        return "redirect:/";
+
+
+
     }
 
 

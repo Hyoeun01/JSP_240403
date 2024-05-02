@@ -24,4 +24,15 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.insert(memberVO);
 
     }
+
+    @Override
+    public MemberDTO login(MemberDTO memberDTO) throws Exception{
+
+        MemberVO memberVO = memberMapper.login(modelMapper.map(memberDTO,MemberVO.class));
+
+
+        return modelMapper.map(memberVO, MemberDTO.class);
+    }
+
+
 }

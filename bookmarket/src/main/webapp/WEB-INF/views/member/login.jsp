@@ -30,12 +30,12 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<div class="form-group">
 			<label for="inputUserName" class="sr-only">User Name</label>
 			<input id="inputUserName" type="text" class="form-controll" placeholder="ID"
-			name="id" required autofocus>
+			name="memberID" required autofocus>
 		</div>
 		<div class="form-group">
 			<label for="inputPassword" class="sr-only">Password</label>
 			<input id="inputPassword" type="password" class="form-controll" placeholder="password"
-			name="pw" required>
+			name="memberPW" required>
 		</div>
 		<button class="btn btn btn-lg btn-success btn-black" type="submit">로그인</button>
 	</form>
