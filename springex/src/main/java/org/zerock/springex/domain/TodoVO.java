@@ -21,5 +21,5 @@ public class TodoVO {
     private LocalDate dueDate;
     private String writer;
     private boolean finished;
-    private String file;
+    private File image;
 }

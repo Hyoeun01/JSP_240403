@@ -30,5 +30,5 @@ public class TodoDTO {
     @NotEmpty
     private String writer; // 새로 추가됨!
 
-    private String file;
+    private File image;
 }
