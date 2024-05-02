@@ -1,16 +1,15 @@
-package org.zerock.bookmarket.domain;
+package org.zerock.bookmarket.dto;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-
-public class MemberVO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class MemberDTO {
     private String memberID;
     private String memberPW;
     private String memberName;
