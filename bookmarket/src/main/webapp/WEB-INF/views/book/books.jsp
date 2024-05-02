@@ -9,7 +9,7 @@ href="/resources/css/bootstrap.min.css">
 <title>도서 목록</title>
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<jsp:include page="../../../views/menu.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">도서 목록</h1>
@@ -43,7 +43,7 @@ href="/resources/css/bootstrap.min.css">
 			class="btn btn-secondary" role="button">
 			도서 등록 &raquo;</a>
 		</div>
-	<jsp:include page="../footer.jsp" />
+	<jsp:include page="../../../views/footer.jsp" />
 </body>
 </html>
 

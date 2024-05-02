@@ -15,7 +15,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<jsp:include page="../menu.jsp" />
+<jsp:include page="../../../views/menu.jsp" />
 <div class="jumbotron">
     <div class="container">
         <h1 class="display-3">회원가입</h1>
@@ -66,6 +66,6 @@
         </div>
     </form>
 </div>
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../../../views/footer.jsp" />
 </body>
 </html>

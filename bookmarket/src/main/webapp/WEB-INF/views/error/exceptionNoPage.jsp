@@ -9,7 +9,7 @@
 href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<jsp:include page="../../../views/menu.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h2 class="alert alert-danger">요청하신 페이지를 찾을 수 없습니다.</h2>
@@ -19,7 +19,7 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<p><%=request.getRequestURL() %></p>
 		<p><a href="/books.do" class="btn btn-secondary">도서 목록 &raquo;</a></p>
 	</div>
-	<jsp:include page="../footer.jsp" />
+	<jsp:include page="../../../views/footer.jsp" />
 </body>
 </html>
 

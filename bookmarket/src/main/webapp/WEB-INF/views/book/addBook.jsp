@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/resources/js/validation.js"></script>
 </head>
 <body>
-	<jsp:include page="../menu.jsp" />
+	<jsp:include page="../../../views/menu.jsp" />
 	<div class="jumbotron">
 		<div class="container">
 			<h1 class="display-3">도서 등록</h1>
@@ -102,7 +102,7 @@
 			</div>
 		</form>
 	</div>
-	<jsp:include page="../footer.jsp" />
+	<jsp:include page="../../../views/footer.jsp" />
 	
 </body>
 </html>
