@@ -9,8 +9,8 @@
     </select>
 
     <insert id="addBook">
-        insert into book (id, name, description, category, author, publisher, releaseDate, pages, unitPrice, unitInStock, imgFileName, createDate)
-        values (#{id},#{name},#{description},#{category},#{author},#{publisher},#{releaseDate},#{pages},#{unitPrice},#{unitInStock},#{imgFileName},#{createDate})
+        insert into book (id, name, description, category, author, publisher, releaseDate, pages, unitPrice, unitInStock, imgFileName)
+        values (#{id},#{name},#{description},#{category},#{author},#{publisher},#{releaseDate},#{pages},#{unitPrice},#{unitInStock},#{imgFileName})
     </insert>
 
     <select id="selectOneBook" resultType="org.zerock.bookmarket.domain.BookVO">

@@ -20,7 +20,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5">
-					<img src="/upload/${book.imgFileName}" style="width: 100%;"
+					<img src="/img/${book.imgFileName}" style="width: 100%;"
 						alt="image">
 				</div>
 				<div class="col-md-7">

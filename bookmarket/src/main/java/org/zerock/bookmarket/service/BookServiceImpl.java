@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public List<BookDTO> getBooks() {
+    public List<BookDTO> getBooks(BookDTO bookDTO) {
         List<BookDTO> dtoList = bookMapper.getAllBooks().stream()
                 .map(bookVO -> modelMapper.map(bookVO, BookDTO.class))
                 .collect(Collectors.toList());

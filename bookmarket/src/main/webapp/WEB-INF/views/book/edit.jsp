@@ -28,7 +28,7 @@
 	<div class="row" align="center">
 			<c:forEach items="${books}" var="book">
 			<div class="col-md-4">
-				<img src="/upload/${book.imgFileName}" style="width:100%;" alt="">
+				<img src="/img/${book.imgFileName}" style="width:100%;" alt="">
 				<h3>${book.name}</h3>
 				<p>${book.description}</p>
 				<p>${book.unitPrice}</p>
