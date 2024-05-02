@@ -48,21 +48,24 @@ public class MemberController {
 
     @PostMapping("/login")
     public String loginMember(MemberDTO memberDTO, HttpServletRequest req, RedirectAttributes redirectAttributes) {
-        log.info("a00sdf");
         try{
             HttpSession session = req.getSession();
             session.setAttribute("loginInfo",  memberService.login(memberDTO));
-
         } catch (Exception e){
             e.printStackTrace();
             // redirectAttributes.addFlashAttribute("error", "아이디와 비밀번호를 확인해주세요...");
             return "redirect:/member/login?error=fail";
         }
         return "redirect:/";
-
-
-
     }
 
+    @GetMapping("/logout")
+    public String logoutGet(HttpServletRequest req) throws Exception{
+        log.info("logout...");
+        HttpSession session = req.getSession();
+        session.invalidate();
 
+        return "redirect:/";
+
+    }
 }
