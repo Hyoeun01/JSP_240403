@@ -68,18 +68,19 @@ public class BookController {
     }
 
     @GetMapping("/edit")
-    public void edit() {
-
+    public void edit(BookDTO bookDTO, Model model) {
+        model.addAttribute("books", bookService.getBooks(bookDTO));
     }
-    @PostMapping("/edit")
-    public void editBook(BookDTO bookDTO) {
-        log.info("book edit....");
+    @PostMapping("/modify")
+    public String editBook(BookDTO bookDTO) {
         bookService.modifyBook(bookDTO);
+        return "redirect:/book/edit";
     }
 
-    @GetMapping("/update")
-    public void update() {
+    @GetMapping("/modify")
+    public void update(String id, Model model) {
         log.info("book update....");
+        model.addAttribute("book",bookService.getOneBook(id));
     }
 
 }

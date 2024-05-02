@@ -28,7 +28,7 @@
 						<div class="form-group row">
 							<label class="col-sm-2">도서 코드</label>
 							<div class="col-sm-3">
-								<input type="text" id="id" name="id" class="form-control" value="${book.id}">
+								<input type="text" id="id" name="id" class="form-control" value="${book.id}" readonly>
 							</div>
 						</div>
 						<div class="form-group row">
@@ -87,14 +87,14 @@
 								<input type="text" id="unitInStock" name="unitInStock" class="form-control" value="${book.unitInStock}">
 							</div>
 						</div>
-						<div class="form-group row">
-							<label class="col-sm-2">상태</label>
-							<div class="col-sm-5">
-								<input type="radio" name="condition" value="New" ${book.condition=="New"?"checked":""}> 신규 도서
-								<input type="radio" name="condition" value="Old" ${book.condition=="Old"?"checked":""}> 중고 도서
-								<input type="radio" name="condition" value="E-Book" ${book.condition=="E-Book"?"checked":""}>  E-Book
-							</div>
-						</div>
+<%--						<div class="form-group row">--%>
+<%--							<label class="col-sm-2">상태</label>--%>
+<%--							<div class="col-sm-5">--%>
+<%--								<input type="radio" name="condition" value="New" ${book.condition=="New"?"checked":""}> 신규 도서--%>
+<%--								<input type="radio" name="condition" value="Old" ${book.condition=="Old"?"checked":""}> 중고 도서--%>
+<%--								<input type="radio" name="condition" value="E-Book" ${book.condition=="E-Book"?"checked":""}>  E-Book--%>
+<%--							</div>--%>
+<%--						</div>--%>
 						<div class="form-group row">
 							<label class="col-sm-2">이미지</label>
 							<div class="col-sm-5">

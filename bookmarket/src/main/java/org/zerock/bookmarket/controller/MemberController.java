@@ -29,7 +29,7 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String joinPost(@Valid MemberDTO memberDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws Exception{
+    public String joinPost(@Valid MemberDTO memberDTO, BindingResult bindingResult) {
         log.info("post member join......");
 
         if(bindingResult.hasErrors()){
@@ -47,7 +47,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String loginMember(MemberDTO memberDTO, HttpServletRequest req, RedirectAttributes redirectAttributes) {
+    public String loginMember(MemberDTO memberDTO, HttpServletRequest req) {
         try{
             HttpSession session = req.getSession();
             session.setAttribute("loginInfo",  memberService.login(memberDTO));
