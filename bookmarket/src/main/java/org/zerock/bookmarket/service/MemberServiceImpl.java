@@ -30,7 +30,6 @@ public class MemberServiceImpl implements MemberService {
 
         MemberVO memberVO = memberMapper.login(modelMapper.map(memberDTO,MemberVO.class));
 
-
         return modelMapper.map(memberVO, MemberDTO.class);
     }
 
