@@ -87,10 +87,45 @@
     // })
     function printReplies(page,size,goLast){
         getList({bno, page, size, goLast}).then(
-            data => {console.log(data)}
+            data => {
+                printList(data.dtoList) //목록처리
+                printPages(data) // 페이지처리
+            }
         ).catch(e =>{
             console.error(e)
         })
     }
     printReplies(1,10) // 무조건호출하기
+
+    const replyList = document.querySelector('.replyList') // 댓글목록 DOM
+    const replyPaging = document.querySelector('.replyPaging') //  페이지 목록 DOM
+    function printList(dtoList){
+        let str = '';
+        if(dtoList && dtoList.length>0) {
+            for( const dto of dtoList) {
+                str += `<li class="list-group-item d-flex replyItem">
+                        <span class="col-2">${dto.rno}</span>
+                        <span class="col-6" data-rno="${dto.rno}">${dto.replyText}</span>
+                        <span class="col-2">${dto.replyer}</span>
+                        <span class="col-2">${dto.regDate}</span>
+                        </li>`
+            }
+        }
+        replyList.innerHTML = str
+    }
+
+    function printPages(data) { // 페이지 목록 출력
+        let pageStr = ''; // pagination
+        if(data.prev) {
+            pageStr += `<li class="page-item"><a class="page-link" data-page="${data.start-1}">PREV</a></li>`
+        }
+        for(let i = data.start ; i <= data.end; i++){
+            pageStr += `<li class="page-item ${i == data.page?"active":""}"><a class="page-link" data-page="${i}">${i}</a></li>`
+        }
+        if(data.next) {
+            pageStr += `<li class="page-item"><a class="page-link" data-page="${data.end+1}">NEXT</a></li>`
+        }
+        replyPaging.innerHTML = pageStr
+    }
+
 </script>
