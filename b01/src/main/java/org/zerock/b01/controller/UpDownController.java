@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.b01.dto.upload.UploadFileDTO;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -33,18 +34,23 @@ public class UpDownController {
 
     @Tag(name = "Upload POST", description = "Post방식으로 파일등록")
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String upload(MultipartFile file) {
-        log.info(file);
-        if(!file.isEmpty()) {
-            String originalName = file.getOriginalFilename();
-            log.info(originalName);
-            String uuid = UUID.randomUUID().toString();
-            Path savePath = Paths.get(uploadPath,uuid+"_"+originalName);
-            try{
-                file.transferTo(savePath);
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
+    public String upload(UploadFileDTO uploadFileDTO) {
+        log.info(uploadFileDTO);
+        if(uploadFileDTO.getFiles() != null) {
+            uploadFileDTO.getFiles().forEach(multipartFile -> {
+                String originalName = multipartFile.getOriginalFilename();
+                log.info(originalName);
+
+                String uuid = UUID.randomUUID().toString();
+                Path savePath = Paths.get(uploadPath,uuid+"_"+originalName);
+                try{
+                    multipartFile.transferTo(savePath);
+                }catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+
 
         }
         return null;
