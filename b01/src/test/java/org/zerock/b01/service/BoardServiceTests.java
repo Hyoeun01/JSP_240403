@@ -87,12 +87,18 @@ public class BoardServiceTests {
 
     @Test
     public void testReadAll(){
-        Long bno = 101L;
+        Long bno = 99L;
         BoardDTO boardDTO = boardService.readOne(bno);
         log.info(boardDTO);
         for(String fileName : boardDTO.getFileNames()) {
             log.info(fileName);
         } // end for
 
+    }
+
+    @Test
+    public void testRemoveAll(){
+        Long bno = 1L;
+        boardService.remove(bno);
     }
 }
