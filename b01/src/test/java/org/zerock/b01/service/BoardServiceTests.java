@@ -36,10 +36,12 @@ public class BoardServiceTests {
     public void testModify() {
         //변경에 필요한 데이터만
         BoardDTO boardDTO = BoardDTO.builder()
-                .bno(201L)
-                .title("update title")
-                .content("update content")
+                .bno(101L)
+                .title("update title..101")
+                .content("update content...101")
                 .build();
+
+        boardDTO.setFileNames(Arrays.asList(UUID.randomUUID()+"_zzz.jpg"));
         boardService.modify(boardDTO);
     }
 
@@ -85,7 +87,7 @@ public class BoardServiceTests {
 
     @Test
     public void testReadAll(){
-        Long bno = 1L;
+        Long bno = 101L;
         BoardDTO boardDTO = boardService.readOne(bno);
         log.info(boardDTO);
         for(String fileName : boardDTO.getFileNames()) {
