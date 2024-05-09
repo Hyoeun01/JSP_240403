@@ -12,7 +12,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.b01.domain.Board;
 import org.zerock.b01.domain.Reply;
+import org.zerock.b01.repository.BoardRepository;
 import org.zerock.b01.repository.ReplyRepository;
+
+import java.util.UUID;
 
 @SpringBootTest
 @Log4j2
@@ -20,6 +23,8 @@ public class ReplyRepositoryTests {
 
     @Autowired
     private ReplyRepository replyRepository;
+    @Autowired
+    private BoardRepository boardRepository;
 
     @Test
     public void testInsert(){
@@ -52,5 +57,20 @@ public class ReplyRepositoryTests {
         result.getContent().forEach(reply -> {
             log.info(reply);
         });
+    }
+
+    @Test
+    public void testInsertWithImages(){
+        Board board = Board.builder()
+                .title("이미지테스트")
+                .content("첨부파일 테스트")
+                .writer("tester")
+                .build();
+
+        for (int i = 0 ; i < 3 ; i ++) {
+            board.addImage(UUID.randomUUID().toString(),"file"+i+".jpg");
+        } // end for
+
+        boardRepository.save(board);
     }
 }
