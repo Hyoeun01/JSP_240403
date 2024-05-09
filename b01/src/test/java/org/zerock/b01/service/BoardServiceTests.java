@@ -97,7 +97,7 @@ public class BoardServiceTests {
 
     @Test
     public void testRemoveAll(){
-        Long bno = 1L;
+        Long bno = 2L;
         boardService.remove(bno);
     }
 

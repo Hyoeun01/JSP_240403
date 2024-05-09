@@ -13,6 +13,7 @@ import org.zerock.b01.domain.QBoard;
 import org.zerock.b01.domain.QReply;
 import org.zerock.b01.dto.*;
 import org.zerock.b01.repository.BoardRepository;
+import org.zerock.b01.repository.ReplyRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,7 @@ public class BoardServiceImpl implements BoardService{
 
     private final ModelMapper modelMapper;
     private final BoardRepository boardRepository;
+    private final ReplyRepository replyRepository;
 
     @Override
     public Long register(BoardDTO boardDTO) {
@@ -64,6 +66,7 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void remove(Long bno) {
+        replyRepository.deleteByBoard_Bno(bno);
         boardRepository.deleteById(bno);
     }
 
