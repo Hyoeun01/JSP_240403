@@ -206,7 +206,8 @@ public class BoardRepositoryTests {
     public void testSearchImageReplyCount(){
         Pageable pageable = PageRequest.of(0,10,Sort.by("bno").descending());
         // boardRepository.searchWithAll(null,null,pageable);
-        Page<BoardListAllDTO> result = boardRepository.searchWithAll(null,null,pageable);
+        String[] type = {"t","c","w"};
+        Page<BoardListAllDTO> result = boardRepository.searchWithAll(type,"5",pageable);
 
         log.info("-----------------------");
         log.info(result.getTotalElements());
