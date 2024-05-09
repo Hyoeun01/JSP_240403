@@ -15,6 +15,7 @@ import org.zerock.b01.domain.Reply;
 import org.zerock.b01.repository.BoardRepository;
 import org.zerock.b01.repository.ReplyRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootTest
@@ -72,5 +73,15 @@ public class ReplyRepositoryTests {
         } // end for
 
         boardRepository.save(board);
+    }
+
+    @Test
+    public void testReadWithImages(){
+        Optional<Board> result = boardRepository.findById(1L);
+        Board board = result.orElseThrow();
+
+        log.info(board);
+        log.info("-----------------");
+        log.info(board.getImageSet());
     }
 }
