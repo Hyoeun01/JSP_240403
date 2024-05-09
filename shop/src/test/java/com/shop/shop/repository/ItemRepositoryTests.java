@@ -56,4 +56,36 @@ public class ItemRepositoryTests {
             System.out.println(item.toString());
         }
     }
+
+    @Test
+    @DisplayName("상품명, 상품상세설명 OR테스트")
+    public void findByItemNmOrItemDetailTest(){
+        this.createItemList();
+        List<Item> itemList =
+                itemRepository.findByItemNmOrItemDetail("테스트상품1","테스트상품 상세 설명5");
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
+
+    @Test
+    @DisplayName("가격 LessThan테스트")
+    public void findByPriceLessThanTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByPriceLessThan(10500);
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
+
+    @Test
+    @DisplayName("가격 내림차순 조회테스트")
+    public void findByPriceLessThanOrderByPriceDescTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByPriceLessThanOrderByPriceDesc(10500);
+        for(Item item : itemList){
+            System.out.println(item.toString());
+        }
+    }
+
 }
