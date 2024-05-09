@@ -11,4 +11,6 @@ public interface BoardSearch {
 
     // 댓글 표시해서 목록 출력하기
     Page<BoardListReplyCountDTO> searchWithReplyCount(String[] types, String keyword, Pageable pageable);
+
+    Page<BoardListReplyCountDTO> searchWithAll(String[] types, String keyword, Pageable pageable);
 }
