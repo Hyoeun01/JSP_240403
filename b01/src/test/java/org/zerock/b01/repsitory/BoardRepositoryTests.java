@@ -15,6 +15,7 @@ import org.zerock.b01.domain.Board;
 import org.zerock.b01.domain.BoardImage;
 import org.zerock.b01.dto.BoardListReplyCountDTO;
 import org.zerock.b01.repository.BoardRepository;
+import org.zerock.b01.repository.ReplyRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +28,8 @@ public class BoardRepositoryTests {
 
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Test
     public void testInsert(){
@@ -162,11 +165,19 @@ public class BoardRepositoryTests {
         Board board = result.orElseThrow();
         board.clearImages(); // 기존의 첨부파일 삭제
         for(int i = 0 ; i < 2 ; i ++) { // 새로운 첨부파일
-            board.addImage(UUID.randomUUID().toString(),"updatdFile"+i+".jpg");
+            board.addImage(UUID.randomUUID().toString(),"updateFile"+i+".jpg");
         }
         boardRepository.save(board);
     }
 
+    @Test
+    @Transactional
+    @Commit
+    public void testRemoveAll(){
+        Long bno = 1L;
+        replyRepository.deleteByBoard_Bno(bno);
+        boardRepository.deleteById(bno);
+    }
 
 }
 
