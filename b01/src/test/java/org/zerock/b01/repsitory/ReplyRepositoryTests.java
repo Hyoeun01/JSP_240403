@@ -60,28 +60,5 @@ public class ReplyRepositoryTests {
         });
     }
 
-    @Test
-    public void testInsertWithImages(){
-        Board board = Board.builder()
-                .title("이미지테스트")
-                .content("첨부파일 테스트")
-                .writer("tester")
-                .build();
 
-        for (int i = 0 ; i < 3 ; i ++) {
-            board.addImage(UUID.randomUUID().toString(),"file"+i+".jpg");
-        } // end for
-
-        boardRepository.save(board);
-    }
-
-    @Test
-    public void testReadWithImages(){
-        Optional<Board> result = boardRepository.findById(1L);
-        Board board = result.orElseThrow();
-
-        log.info(board);
-        log.info("-----------------");
-        log.info(board.getImageSet());
-    }
 }
