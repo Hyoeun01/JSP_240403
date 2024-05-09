@@ -31,7 +31,7 @@ public class ReplyRepositoryTests {
     @Test
     public void testInsert(){
         // 게시글번호가 100번
-        Long bno = 100L;
+        Long bno = 2L;
 
         // Reply 클래스에 멤버로 사용될 더미 예제
         Board board = Board.builder().bno(bno).build();
@@ -39,8 +39,8 @@ public class ReplyRepositoryTests {
         // Reply 클래스 생성하기
         Reply reply = Reply.builder()
                 .board(board)
-                .replyText("댓글4..........")
-                .replyer("replyer4").build();
+                .replyText("댓글..........")
+                .replyer("replyer").build();
 
         // 저장하기
         replyRepository.save(reply);
