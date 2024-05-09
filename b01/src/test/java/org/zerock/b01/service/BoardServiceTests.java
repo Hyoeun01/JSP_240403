@@ -19,7 +19,7 @@ public class BoardServiceTests {
     private BoardService boardService;
 
     @Test
-    public void testRegister(){
+    public void testRegister() {
         log.info(boardService.getClass().getName());
 
         BoardDTO boardDTO = BoardDTO.builder()
@@ -29,40 +29,40 @@ public class BoardServiceTests {
                 .build();
 
         Long bno = boardService.register(boardDTO);
-        log.info("bno : " +bno);
+        log.info("bno : " + bno);
     }
 
-@Test
-    public void testModify(){
+    @Test
+    public void testModify() {
         //변경에 필요한 데이터만
-    BoardDTO boardDTO = BoardDTO.builder()
-            .bno(201L)
-            .title("update title")
-            .content("update content")
-            .build();
-    boardService.modify(boardDTO);
-}
+        BoardDTO boardDTO = BoardDTO.builder()
+                .bno(201L)
+                .title("update title")
+                .content("update content")
+                .build();
+        boardService.modify(boardDTO);
+    }
 
-@Test
-    public void testDelete(){
+    @Test
+    public void testDelete() {
         boardService.remove(201L);
-}
+    }
 
-@Test
-    public void testList(){
-    PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-            .type("tcw")
-            .keyword("1")
-            .page(1)
-            .size(10)
-            .build();
+    @Test
+    public void testList() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .type("tcw")
+                .keyword("1")
+                .page(1)
+                .size(10)
+                .build();
 
-    PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
-    log.info(responseDTO);
-}
+        PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
+        log.info(responseDTO);
+    }
 
-@Test
-    public void testRegisterWithImages(){
+    @Test
+    public void testRegisterWithImages() {
         log.info(boardService.getClass().getName());
 
         BoardDTO boardDTO = BoardDTO.builder()
@@ -73,13 +73,24 @@ public class BoardServiceTests {
 
         boardDTO.setFileNames(
                 Arrays.asList(
-                        UUID.randomUUID()+"_aaa.jpg",
-                        UUID.randomUUID()+"_bbb.jpg",
-                        UUID.randomUUID()+"_ccc.jpg"
+                        UUID.randomUUID() + "_aaa.jpg",
+                        UUID.randomUUID() + "_bbb.jpg",
+                        UUID.randomUUID() + "_ccc.jpg"
                 ));
         Long bno = boardService.register(boardDTO);
 
-        log.info("bno : "+bno);
+        log.info("bno : " + bno);
 
-}
+    }
+
+    @Test
+    public void testReadAll(){
+        Long bno = 1L;
+        BoardDTO boardDTO = boardService.readOne(bno);
+        log.info(boardDTO);
+        for(String fileName : boardDTO.getFileNames()) {
+            log.info(fileName);
+        } // end for
+
+    }
 }
