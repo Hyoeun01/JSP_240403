@@ -19,6 +19,8 @@ public interface BoardService {
     // 게시글 목록에 댓글 개수 표시하기
     PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO);
 
+    PageResponseDTO<BoardListAllDTO> listWithAll(PageRequestDTO pageRequestDTO);
+
     default Board dtoToEntity(BoardDTO boardDTO) {
         Board board = Board.builder()
                 .bno(boardDTO.getBno())
