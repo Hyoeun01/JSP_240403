@@ -26,7 +26,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO) // 기본키 생성전략 : auto
     private Long id; // 상품 코드
 
-    // nullable 설정을 이용해서 항상 값이 있어야하는 필드는 not null 설정하기. String 필드는 defalut 값으로 255가 설정되어 있으며, 각 필드마다 필요한 길이를 length 속성에 세팅하면 됨
+    // nullable 설정을 이용해서 항상 값이 있어야하는 필드는 not null 설정하기. String 필드는 default 값으로 255가 설정되어 있으며, 각 필드마다 필요한 길이를 length 속성에 세팅하면 됨
     @Column(nullable = false, length = 50)
     private String itemNm; // 상품명
 
