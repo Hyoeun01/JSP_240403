@@ -142,4 +142,25 @@
             targetDiv.remove()
         })
     }
+
+    // 게시물 등록 과정 처리하기
+    document.querySelector(".submitBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = document.querySelector(".uploadHidden")
+        const uploadFiles = uploadResult.querySelectorAll("img")
+
+        let str = ''
+
+        for (let i = 0 ; i < uploadFiles.length ; i++) {
+            const uploadFile = uploadFiles[i]
+            const imgLink = uploadFile.getAttribute("src")
+
+            str += `<input type='hidden' name='fileNames' value="${imgLink}">`
+        }
+        target.innerHTML = str;
+
+        document.querySelector(".submitBtn").submit();
+    },false)
 </script>
