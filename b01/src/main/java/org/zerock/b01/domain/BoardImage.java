@@ -14,7 +14,9 @@ import lombok.*;
 public class BoardImage implements Comparable<BoardImage>{
     @Id
     private String uuid;
+
     private String fileName;
+
     private int ord;
 
     @ManyToOne
