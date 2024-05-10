@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 // url에 "/thymeleaf"경로로 오는 요청을 ThymeleafExController 가 처리
@@ -28,5 +30,22 @@ public class ThymeleafExController {
 
         model.addAttribute("itemDto",itemDTO);
         return "thymeleafEx/thymeleafEx02";
+    }
+
+    @GetMapping(value = "/ex03")
+    public String thymeleafExample03(Model model){
+        List<ItemDTO> itemDTOList = new ArrayList<>();
+
+        for (int i = 1; i <= 10; i++){
+            ItemDTO itemDTO = new ItemDTO();
+            itemDTO.setItemDetail("상품 상세 설명"+i);
+            itemDTO.setItemNm("테스트 상품"+i);
+            itemDTO.setPrice(10000+i*100);
+            itemDTO.setRegTime(LocalDateTime.now());
+
+            itemDTOList.add(itemDTO);
+        }
+        model.addAttribute("itemDtoList", itemDTOList);
+        return "thymeleafEx/thymeleafEx03";
     }
 }
