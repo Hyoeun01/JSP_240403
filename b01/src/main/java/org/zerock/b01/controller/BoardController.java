@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.b01.dto.BoardDTO;
-import org.zerock.b01.dto.BoardListReplyCountDTO;
-import org.zerock.b01.dto.PageRequestDTO;
-import org.zerock.b01.dto.PageResponseDTO;
+import org.zerock.b01.dto.*;
 import org.zerock.b01.service.BoardService;
 
 @Controller
@@ -29,10 +26,11 @@ public class BoardController {
 
         //PageResponseDTO<BoardDTO> responseDTO = boardService.list(pageRequestDTO);
 
-        // 개시글에 댓글 개수 표현하는 목록 출력으로 변경(타입, 메서드명 변경)
-        PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
-        // log.info(responseDTO);
+        // 게시글에 댓글 개수 표현하는 목록 출력으로 변경(타입, 메서드명 변경)
+        //PageResponseDTO<BoardListReplyCountDTO> responseDTO = boardService.listWithReplyCount(pageRequestDTO);
 
+        PageResponseDTO<BoardListAllDTO> responseDTO = boardService.listWithAll(pageRequestDTO);
+        log.info(responseDTO);
         model.addAttribute("responseDTO", responseDTO);
     }
 
