@@ -34,7 +34,7 @@
                         </div>
                         <div class="my-4">
                             <div class="float-end">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary submitBtn">Submit</button>
                                 <button type="reset" class="btn btn-secondary">Reset</button>
                             </div>
                         </div>
@@ -145,6 +145,7 @@
 
     // 게시물 등록 과정 처리하기
     document.querySelector(".submitBtn").addEventListener("click", function (e){
+
         e.preventDefault()
         e.stopPropagation()
 
@@ -161,6 +162,6 @@
         }
         target.innerHTML = str;
 
-        document.querySelector(".submitBtn").submit();
+        document.querySelector(".form").submit();
     },false)
 </script>
