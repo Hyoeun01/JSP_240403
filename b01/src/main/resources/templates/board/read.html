@@ -132,7 +132,7 @@
 </div> <!--end layout fragement -->
 
 <script layout:fragment="script" th:inline="javascript">
-    const currentUser = [[${#authentication.principal.username]]
+    const currentUser = [[${#authentication.principal.username}]]
     const bno = [[${dto.bno}]]
     // get1(bno).then(data => {
     //     console.log(data)
