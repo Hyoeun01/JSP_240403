@@ -28,7 +28,7 @@ import java.util.List;
 public class BoardController {
 
     @Value("${org.zerock.upload.path}")
-    private String uploadPath;
+    private String    uploadPath;
 
     private final BoardService boardService;
 
