@@ -1,33 +1,51 @@
 package org.zerock.b01.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Member {
+@ToString(exclude = "roleSet")
+public class Member extends BaseEntity{
     @Id
-    private String member_id;
-    @Column(length = 20 , nullable = false)
-    private String member_pw;
-    @Column(length = 20 , nullable = false)
-    private String name;
-    @Column(length = 20 , nullable = false)
-    private String phone;
-    @Column(length = 20 , nullable = false)
-    private String email1;
-    @Column(length = 20 , nullable = false)
-    private String email2;
+    private String mid;
 
-    @Column(length = 6 , nullable = false)
-    private String gender;
-    private boolean agree;
+    private String mpw;
+    private String email;
+    private boolean del;
 
+    private boolean social;
+
+    @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
-    private LocalDateTime create_date = LocalDateTime.now();
+    private Set<MemberRole> roleSet = new HashSet<>();
+
+    public void changePassword(String mpw){
+        this.mpw=mpw;
+    }
+    public void changeEmail(String email){
+        this.email=email;
+    }
+    public void changeDel(boolean del){
+        this.del=del;
+    }
+    public void changeSocial(boolean social){
+        this.social=social;
+    }
+    public void addRole(MemberRole memberRole){
+        this.roleSet.add(memberRole);
+    }
+
+    public void clearRoles(){
+        this.roleSet.clear();
+    }
 }

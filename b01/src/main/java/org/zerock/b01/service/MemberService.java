@@ -1,11 +1,11 @@
 package org.zerock.b01.service;
 
 
-import org.zerock.b01.dto.MemberDTO;
+import org.zerock.b01.dto.MemberDTO2;
 
 public interface MemberService {
-    String register(MemberDTO memberDTO);
-    MemberDTO readOne(String memberId);
-    MemberDTO login(String member_id, String member_pw);
+    String register(MemberDTO2 memberDTO2);
+    MemberDTO2 readOne(String memberId);
+    MemberDTO2 login(String member_id, String member_pw);
 
 }

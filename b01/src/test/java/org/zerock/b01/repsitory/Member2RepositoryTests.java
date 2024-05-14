@@ -4,20 +4,18 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.zerock.b01.domain.Member;
+import org.zerock.b01.domain.Member2;
 import org.zerock.b01.repository.MemberRepository;
-
-import java.time.LocalDateTime;
 
 @SpringBootTest
 @Log4j2
-public class MemberRepositoryTests {
+public class Member2RepositoryTests {
     @Autowired
     private MemberRepository memberRepository;
 
     @Test
     public void testInsert(){
-        Member member = Member.builder()
+        Member2 member2 = Member2.builder()
                 .member_id("test3")
                 .member_pw("1234")
                 .name("testuser1")
@@ -28,6 +26,6 @@ public class MemberRepositoryTests {
                 .agree(true)
                 .build();
 
-        Member result = memberRepository.save(member);
+        Member2 result = memberRepository.save(member2);
     }
 }
