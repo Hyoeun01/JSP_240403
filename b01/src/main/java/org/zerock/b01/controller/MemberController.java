@@ -50,4 +50,10 @@ public class MemberController {
     public void modifyGET(){
         log.info("modify get..........");
     }
+
+    @PostMapping("/modify")
+    public String modifyPOST(){
+        log.info("modify post..........");
+        return "redirect:/";
+    }
 }
