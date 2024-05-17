@@ -23,19 +23,21 @@ public class MemberRepositoryTests {
 
     @Test
     public void  insertMember(){
+        // 1부터 100까지 반복하기위한 스트림
         IntStream.rangeClosed(1,100).forEach(i ->{
+            // 회원 생성 (비밀번호는 passwordEncoder 이용해서 1111로 인코딩)
             Member member = Member.builder()
                     .mid("member"+i)
                     .mpw(passwordEncoder.encode("1111"))
                     .email("email"+i+"@aaa.bbb")
                     .build();
-
+            // 회원 권한 설정(일반회원)
             member.addRole(MemberRole.USER);
-
+            // 관리자 권한 설정
             if(i>=90){
                 member.addRole(MemberRole.ADMIN);
             }
-
+            // 데이터베이스에 저장
             memberRepository.save(member);
         });
     }

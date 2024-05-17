@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.b01.domain.Member2;
 import org.zerock.b01.repository.MemberRepository;
+import org.zerock.b01.repository.MemberRepository2;
 
 @SpringBootTest
 @Log4j2
 public class Member2RepositoryTests {
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberRepository2 memberRepository2;
 
     @Test
     public void testInsert(){
@@ -26,6 +27,6 @@ public class Member2RepositoryTests {
                 .agree(true)
                 .build();
 
-        Member2 result = memberRepository.save(member2);
+        Member2 result = memberRepository2.save(member2);
     }
 }
