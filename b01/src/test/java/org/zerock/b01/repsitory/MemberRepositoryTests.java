@@ -9,6 +9,7 @@ import org.zerock.b01.domain.Member;
 import org.zerock.b01.domain.MemberRole;
 import org.zerock.b01.repository.MemberRepository;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -40,5 +41,16 @@ public class MemberRepositoryTests {
             // 데이터베이스에 저장
             memberRepository.save(member);
         });
+    }
+
+    @Test
+    public void testRead(){
+        Optional<Member> result = memberRepository.getWithRoles("member100");
+        Member member = result.orElseThrow();
+
+        log.info(member);
+        log.info(member.getRoleSet());
+
+        member.getRoleSet().forEach(memberRole -> log.info(memberRole.name()));
     }
 }
