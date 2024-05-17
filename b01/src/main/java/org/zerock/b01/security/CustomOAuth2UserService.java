@@ -52,7 +52,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         log.info(value);
         LinkedHashMap accountMap = (LinkedHashMap) value;
         String email = (String) accountMap.get("email");
-        log.info("email,,"+email);
+        log.info("email [ "+email+" ]");
         return email;
     }
 }
