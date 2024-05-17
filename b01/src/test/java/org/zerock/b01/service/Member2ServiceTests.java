@@ -10,12 +10,12 @@ import org.zerock.b01.dto.MemberDTO2;
 @Log4j2
 public class Member2ServiceTests {
     @Autowired
-    private MemberService memberService;
+    private MemberService2 memberService2;
 
     @Test
     public void testReadOne(){
         String memberID = "test4";
-        MemberDTO2 memberDTO2 = memberService.readOne(memberID);
+        MemberDTO2 memberDTO2 = memberService2.readOne(memberID);
 
         log.info("memberID : {}", memberDTO2.getMember_id());
         log.info("memberPW : {}", memberDTO2.getMember_pw());
