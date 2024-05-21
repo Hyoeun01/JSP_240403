@@ -19,6 +19,7 @@ public class MemberSecurityDTO extends User {
     private String mid;
     private String mpw;
     private String email;
+
     private boolean del;
     public MemberSecurityDTO(String username, String password, String email, boolean del) {
         super(username,password,new ArrayList<GrantedAuthority>());

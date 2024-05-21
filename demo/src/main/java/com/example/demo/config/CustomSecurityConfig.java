@@ -37,16 +37,16 @@ public class CustomSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         log.info("--------------------------configure------------");
-//        http.formLogin().loginPage("/member/login");
-//        http.csrf().disable();
-//
-//        http.rememberMe()
-//                .key("12345678")
-//                .tokenRepository(persistentTokenRepository())
-//                .userDetailsService(userDetailsService)
-//                .tokenValiditySeconds(60*60*24*30);
-//
-//        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()); // 403
+        http.formLogin().loginPage("/member/login");
+        http.csrf().disable();
+
+        http.rememberMe()
+                .key("12345678")
+                .tokenRepository(persistentTokenRepository())
+                .userDetailsService(userDetailsService)
+                .tokenValiditySeconds(60*60*24*30);
+
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()); // 403
 
         return http.build();
     }

@@ -20,15 +20,19 @@ public class Member extends BaseEntity{
     private String mid;
 
     private String mpw;
+    private String name;
     private String email;
+    private String addr;
     private boolean del;
 
     public void changePassword(String mpw){
         this.mpw=mpw;
     }
+    public void changeName(String name) {this.name=name;}
     public void changeEmail(String email){
         this.email=email;
     }
+    public void changeAddr(String addr) {this.addr=addr;}
     public void changeDel(boolean del){
         this.del=del;
     }
