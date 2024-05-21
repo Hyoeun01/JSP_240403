@@ -6,5 +6,6 @@ public interface MemberService {
     static class MidExistException extends Exception{
     }
     void join(MemberJoinDTO memberJoinDTO) throws MidExistException;
-    void remove(MemberJoinDTO memberJoinDTO);
+    void modify(MemberJoinDTO memberJoinDTO);
+    void remove(String mid);
 }

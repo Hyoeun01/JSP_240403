@@ -10,6 +10,8 @@ import org.zerock.b01copy.domain.MemberRole;
 import org.zerock.b01copy.dto.MemberJoinDTO;
 import org.zerock.b01copy.repository.MemberRepository;
 
+import java.util.Optional;
+
 @Log4j2
 @Service
 @RequiredArgsConstructor
@@ -37,7 +39,16 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Override
-    public void remove(MemberJoinDTO memberJoinDTO) {
+    public void modify(MemberJoinDTO memberJoinDTO) {
+        Optional<Member> result = memberRepository.findById(memberJoinDTO.getMid());
+        Member member = result.orElseThrow();
+        member.change(memberJoinDTO.getMpw(), memberJoinDTO.getName(),memberJoinDTO.getEmail(),memberJoinDTO.getAddr());
+        member.changePassword(passwordEncoder.encode(memberJoinDTO.getMpw()));
+        memberRepository.save(member);
+    }
 
+    @Override
+    public void remove(String mid) {
+        memberRepository.deleteById(mid);
     }
 }

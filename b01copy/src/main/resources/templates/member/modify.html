@@ -42,7 +42,7 @@
                         </div>
                         <div class="my-4">
                             <div class="float-end">
-                                <button type="button" class="btn btn-danger removeBtn">탈퇴</button>
+                                <button type="button" class="btn btn-danger deleteBtn">탈퇴</button>
                                 <button type="submit" class="btn btn-primary modifyBtn">수정</button>
                                 <button type="reset" class="btn btn-secondary">초기화</button>
                             </div>
@@ -54,7 +54,40 @@
     </div>
 </div>
 <script layout:fragment="script" th:inline="javascript">
+    const errors = [[${errors}]]
+    console.log(errors)
 
+    let errorMsg = ''
+
+    if(errors) {
+        for(let i = 0 ; i < errors.length ; i++){
+            errorMsg += `${errors[i].field}은(는) ${errors[i].code} \n`
+        }
+        history.replaceState({},null,null)
+        alert(errorMsg)
+    }
+
+    const link = [[${pageRequestDTO.getLink()}]]
+
+    const formObj = document.querySelector("#modifyForm")
+    document.querySelector(".modifyBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/member/modify?${link}`
+
+        formObj.method = 'post'
+        formObj.submit()
+    }, false)
+
+    document.querySelector(".deleteBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/member/remove`
+        formObj.method = 'post'
+        formObj.submit()
+    }, false)
 
 </script>
 </html>
