@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
+
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
@@ -53,5 +54,12 @@ public class MemberServiceImpl implements MemberService{
     public void remove(MemberJoinDTO memberJoinDTO) {
         String mid = memberJoinDTO.getMid();
         memberRepository.deleteById(mid);
+    }
+
+    @Override
+    public boolean checker(MemberJoinDTO memberJoinDTO) {
+        String mid = memberJoinDTO.getMid();
+        boolean exist = memberRepository.existsById(mid);
+        return exist;
     }
 }

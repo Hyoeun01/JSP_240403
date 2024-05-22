@@ -19,7 +19,7 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text">아이디</span>
                             <input type="text" name="mid" class="form-control">
-                            <button type="button" class="btn btn-secondary checkBtn">중복확인</button>
+                            <button type="button" class="btn btn-primary checkBtn">중복확인</button>
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text">비밀번호</span>
@@ -54,8 +54,24 @@
     </div> <!-- end row -->
 </div>
 <script layout:fragment="script" th:inline="javascript">
-const error = [[${error}]]
-if(error && error === 'mid'){
-    alert("동일한 MID를 가진 계정이 존재합니다.")
-}
+    const formObj = document.querySelector("#registerForm")
+    document.querySelector(".checkBtn").addEventListener("click",function (e){
+
+        e.preventDefault()
+        e.stopPropagation()
+
+        formObj.action = `/member/checker`
+        formObj.method = 'Post'
+        formObj.submit()
+
+    }, false)
+    const error = [[${error}]]
+    if (error && error == 'mid') {
+        alert("가입할 수 없는 아이디 입니다.")
+    }
+    const suc = [[${suc}]]
+    if (suc && suc == 'mid') {
+        alert("회원가입을 계속 진행하세요.")
+    }
+
 </script>

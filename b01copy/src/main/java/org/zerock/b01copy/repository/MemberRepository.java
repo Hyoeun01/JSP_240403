@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.b01copy.domain.Member;
+import org.zerock.b01copy.dto.MemberJoinDTO;
 
 
 import java.util.Optional;
@@ -23,6 +24,8 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     @Transactional
     @Query("update Member m set m.mpw =:mpw where m.mid = :mid ")
     void updatePassword(@Param("mpw") String password, @Param("mid") String mid);
+
+
 }
 
 

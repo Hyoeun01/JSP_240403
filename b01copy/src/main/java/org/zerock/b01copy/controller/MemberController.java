@@ -4,21 +4,27 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.b01copy.dto.MemberJoinDTO;
 import org.zerock.b01copy.dto.PageRequestDTO;
 import org.zerock.b01copy.service.MemberService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @Log4j2
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
+
     private final MemberService memberService;
 
     @GetMapping("/login")
@@ -72,6 +78,20 @@ public class MemberController {
             redirectAttributes.addFlashAttribute("result","removed");
             httpSession.invalidate();
             return "redirect:/board/list";
-
     }
+
+    @PostMapping("/checker")
+    public String checkerPOST(MemberJoinDTO memberJoinDTO, RedirectAttributes redirectAttributes) {
+
+        boolean exist = memberService.checker(memberJoinDTO);
+        if(exist) {
+            log.info("Yes");
+            redirectAttributes.addFlashAttribute("error", "mid");
+        } else {
+            log.info("No");
+            redirectAttributes.addFlashAttribute("suc", "mid");
+        }
+        return "redirect:/member/join";
+    }
+
 }
