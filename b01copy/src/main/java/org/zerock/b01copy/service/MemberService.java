@@ -7,5 +7,5 @@ public interface MemberService {
     }
     void join(MemberJoinDTO memberJoinDTO) throws MidExistException;
     void modify(MemberJoinDTO memberJoinDTO);
-    void remove(String mid);
+    void remove(MemberJoinDTO memberJoinDTO);
 }

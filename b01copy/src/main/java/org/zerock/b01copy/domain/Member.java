@@ -26,7 +26,7 @@ public class Member extends BaseEntity{
     private boolean del;
 
     private boolean social;
-public void change(String mpw, String name, String email, String addr){
+    public void change(String mpw, String name, String email, String addr){
     this.mpw=mpw;
     this.name = name;
     this.email=email;

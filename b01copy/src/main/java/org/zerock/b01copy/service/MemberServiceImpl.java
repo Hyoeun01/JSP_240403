@@ -47,8 +47,11 @@ public class MemberServiceImpl implements MemberService{
         memberRepository.save(member);
     }
 
+
+
     @Override
-    public void remove(String mid) {
+    public void remove(MemberJoinDTO memberJoinDTO) {
+        String mid = memberJoinDTO.getMid();
         memberRepository.deleteById(mid);
     }
 }
