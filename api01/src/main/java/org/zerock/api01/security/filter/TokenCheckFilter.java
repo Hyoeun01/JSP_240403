@@ -40,12 +40,14 @@ public class TokenCheckFilter extends OncePerRequestFilter {
     }
 
     private Map<String, Object> validateAccessToken(HttpServletRequest request) throws AccessTokenException{
+        // authorization : type +인증값
+        // type의 종류 : basic, bearer(jwt) , digest, HOBA, mutual
         String headerStr = request.getHeader("Authorization");
         if(headerStr == null || headerStr.length() < 8 ) {
             throw new AccessTokenException(AccessTokenException.TOKEN_ERROR.UNACCEPT);
         }
 
-        // Bearer 생략 (??)
+        // Bearer 타입 확인하기
         String tokenType = headerStr.substring(0,6);
         String tokenStr = headerStr.substring(7);
 
