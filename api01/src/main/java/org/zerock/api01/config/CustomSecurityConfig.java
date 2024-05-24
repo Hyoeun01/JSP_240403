@@ -45,24 +45,26 @@ public class CustomSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
 
-        // AuthenticationManager 설정
+        // AuthenticationManager 설정 : 인증 관리자 생성을 위한 빌더 생성
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
+        // 인증 관리자 빌더를 사용하여 userDetailsService 설정과 passwordEncoder 설정
         authenticationManagerBuilder
                 .userDetailsService(apiUserDetailsService)
                         .passwordEncoder(passwordEncoder());
 
-        // Get AuthenticationManager
+        // Get AuthenticationManager : 인증 관리자 빌더를 통해 인증 관리자를 생성
         AuthenticationManager authenticationManager =
                 authenticationManagerBuilder.build();
 
-        http.authenticationManager(authenticationManager); // 반드시 필요한 부분
+        http.authenticationManager(authenticationManager); // 반드시 필요한 부분 > http에 인증관리자를 설정
 
-        // APILoginFilter
+        // APILoginFilter 를 불러올 때 사용할 URL설정하기
         APILoginFilter apiLoginFilter = new APILoginFilter("/generateToken");
+        // APILoginFilter 가 위에서 만든 인증 관리자를 사용하게끔 설정
         apiLoginFilter.setAuthenticationManager(authenticationManager);
 
-        // APILoginFilter의 위치 조정
+        // APILoginFilter의 위치 조정 > APILoginFilter 전에 실행할 필터를 설정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
         //log.info("----------configure-------------");
