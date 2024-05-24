@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.zerock.api01.security.APIUserDetailsService;
 import org.zerock.api01.security.filter.APILoginFilter;
 import org.zerock.api01.security.handler.APILoginSuccessHandler;
+import org.zerock.api01.util.JWTUtil;
 
 @Configuration
 @Log4j2
@@ -29,6 +30,7 @@ import org.zerock.api01.security.handler.APILoginSuccessHandler;
 public class CustomSecurityConfig {
 
     private final APIUserDetailsService apiUserDetailsService;
+    private final JWTUtil jwtUtil;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,6 +47,7 @@ public class CustomSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
+        log.info("----------configure-------------");
 
         // AuthenticationManager 설정 : 인증 관리자 생성을 위한 빌더 생성
         AuthenticationManagerBuilder authenticationManagerBuilder =
@@ -66,14 +69,14 @@ public class CustomSecurityConfig {
         apiLoginFilter.setAuthenticationManager(authenticationManager);
 
         // APILoginSuccessHandler
-        APILoginSuccessHandler successHandler = new APILoginSuccessHandler();
+        APILoginSuccessHandler successHandler = new APILoginSuccessHandler(jwtUtil);
         // SuccessHandler 세팅
         apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
         // APILoginFilter의 위치 조정 > APILoginFilter 전에 실행할 필터를 설정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
 
-        //log.info("----------configure-------------");
+
         http.csrf().disable(); // csrf 설정 끄기
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션 생성 설정 끄기
         return http.build();
