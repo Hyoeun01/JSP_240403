@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.zerock.api01.security.APIUserDetailsService;
 import org.zerock.api01.security.filter.APILoginFilter;
+import org.zerock.api01.security.filter.TokenCheckFilter;
 import org.zerock.api01.security.handler.APILoginSuccessHandler;
 import org.zerock.api01.util.JWTUtil;
 
@@ -74,11 +75,15 @@ public class CustomSecurityConfig {
         apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
         // APILoginFilter의 위치 조정 > APILoginFilter 전에 실행할 필터를 설정
-        http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(tokenCheckFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
 
         http.csrf().disable(); // csrf 설정 끄기
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션 생성 설정 끄기
         return http.build();
+    }
+
+    private TokenCheckFilter tokenCheckFilter(JWTUtil jwtUtil){
+        return new TokenCheckFilter(jwtUtil);
     }
 }
