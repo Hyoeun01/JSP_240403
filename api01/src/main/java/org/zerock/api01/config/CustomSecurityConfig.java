@@ -24,20 +24,22 @@ public class CustomSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // 암호화 설정
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         log.info("------------------web configure----------");
+        // 정적 파일 요청을 무시하는 설정
         return (web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
     }
 
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         log.info("----------configure-------------");
-        http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.csrf().disable(); // csrf 설정 끄기
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션 생성 설정 끄기
         return http.build();
     }
 }
