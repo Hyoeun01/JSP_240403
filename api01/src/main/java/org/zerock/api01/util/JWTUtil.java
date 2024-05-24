@@ -45,6 +45,11 @@ public class JWTUtil {
 
     public Map<String, Object> validateToken(String token) throws JwtException{
         Map<String, Object> claim = null;
+        claim = Jwts.parser()
+                .setSigningKey(key.getBytes()) // set Key
+                .parseClaimsJws(token) // 파싱, 검증 > 실패시 에러
+                .getBody();
+
         return claim;
     }
 }
