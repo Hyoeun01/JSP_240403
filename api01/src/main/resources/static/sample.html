@@ -8,13 +8,16 @@
 <h1>Sample Client</h1>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    async function callTest(){
+    async function callTest(){ // 비동기 테스트 메서드 작성
         const response = await axios.get("http://localhost:8080/api/sample/doA")
         return response.data
     }
 
+    // 테스트 메서드 실행
     callTest()
+        // 정상 결과 출력
     .then(data => console.log(data))
+        // 에러 결과 출력
     .catch(e => console.log(e))
 
 </script>
