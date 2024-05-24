@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.zerock.api01.security.APIUserDetailsService;
 import org.zerock.api01.security.filter.APILoginFilter;
+import org.zerock.api01.security.handler.APILoginSuccessHandler;
 
 @Configuration
 @Log4j2
@@ -63,6 +64,11 @@ public class CustomSecurityConfig {
         APILoginFilter apiLoginFilter = new APILoginFilter("/generateToken");
         // APILoginFilter 가 위에서 만든 인증 관리자를 사용하게끔 설정
         apiLoginFilter.setAuthenticationManager(authenticationManager);
+
+        // APILoginSuccessHandler
+        APILoginSuccessHandler successHandler = new APILoginSuccessHandler();
+        // SuccessHandler 세팅
+        apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
         // APILoginFilter의 위치 조정 > APILoginFilter 전에 실행할 필터를 설정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
