@@ -75,6 +75,7 @@ public class CustomSecurityConfig {
         apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
         // APILoginFilter의 위치 조정 > APILoginFilter 전에 실행할 필터를 설정
+        http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(tokenCheckFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
 
