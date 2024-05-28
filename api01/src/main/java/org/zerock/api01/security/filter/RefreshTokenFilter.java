@@ -19,7 +19,9 @@ public class RefreshTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // 요청 url을 path 변수에 저장하고 취득
         String path = request.getRequestURI();
+        // 요청 url이 refreshPath가 아니면 필터로 처리하지 않음
         if(!path.equals(refreshPath)) {
             log.info("skip refresh token filter........");
             filterChain.doFilter(request, response);
