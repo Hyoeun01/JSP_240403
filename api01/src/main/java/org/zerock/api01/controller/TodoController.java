@@ -42,7 +42,7 @@ public class TodoController {
         return Map.of("result", "success");
     }
 
-    @PutMapping(value = "/{tno", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{tno}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> modify(@PathVariable("tno") Long tno, @RequestBody TodoDTO todoDTO) {
         todoDTO.setTno(tno); // 잘못된 tno가 발생하지 못하도록
         todoService.modify(todoDTO);
