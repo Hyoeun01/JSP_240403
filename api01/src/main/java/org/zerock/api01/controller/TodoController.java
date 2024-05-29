@@ -23,6 +23,7 @@ public class TodoController {
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Long> register(@RequestBody TodoDTO todoDTO) {
         log.info(todoDTO);
-        return Map.of("tno",12L);
+        Long tno = todoService.register(todoDTO);
+        return Map.of("tno",tno);
     }
 }
