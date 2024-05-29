@@ -102,9 +102,17 @@ public class CustomSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        // 모든 패턴 허락
+        // origin = protocol+host+port
+        // protocol : http:// , https://
+        // host : 도메인이나 ip주소
+        // port : :80, :8080, :3306
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        // AJAX 에서  실행할 메서드
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
+        // 사용할 헤더 설정
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        // cors 사용설정하기
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
