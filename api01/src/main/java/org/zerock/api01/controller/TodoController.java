@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.zerock.api01.domain.Todo;
 import org.zerock.api01.dto.PageRequestDTO;
 import org.zerock.api01.dto.PageResponseDTO;
 import org.zerock.api01.dto.TodoDTO;
@@ -35,5 +34,18 @@ public class TodoController {
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public PageResponseDTO<TodoDTO> list(PageRequestDTO pageRequestDTO) {
         return todoService.list(pageRequestDTO);
+    }
+
+    @DeleteMapping(value = "/{tno}")
+    public Map<String, String> delete(@PathVariable Long tno) {
+        todoService.remove(tno);
+        return Map.of("result", "success");
+    }
+
+    @PutMapping(value = "/{tno", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, String> modify(@PathVariable("tno") Long tno, @RequestBody TodoDTO todoDTO) {
+        todoDTO.setTno(tno); // 잘못된 tno가 발생하지 못하도록
+        todoService.modify(todoDTO);
+        return Map.of("result", "success");
     }
 }
