@@ -42,7 +42,7 @@ public class S3Uploader {
         log.info("fail to remove original file");
     }
 
-    private void removeS3File(String  fileName) {
+    public void removeS3File(String  fileName) {
         final DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket, fileName);
         amazonS3Client.deleteObject(deleteObjectRequest);
 

@@ -21,4 +21,13 @@ public class S3UploaderTest {
             log.error(e.getMessage());
         }
     }
+
+    @Test
+    public void testRemove(){
+        try {
+            s3uploader.removeS3File("100.jpg");
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+    }
 }
