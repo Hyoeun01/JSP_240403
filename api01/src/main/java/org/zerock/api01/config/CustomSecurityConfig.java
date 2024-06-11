@@ -35,87 +35,87 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
 public class CustomSecurityConfig {
-
     private final APIUserDetailsService apiUserDetailsService;
     private final JWTUtil jwtUtil;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder(){
         // 암호화 설정
         return new BCryptPasswordEncoder();
     }
-
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
-        log.info("------------------web configure----------");
-        // 정적 파일 요청을 무시하는 설정
-        return (web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations()));
+        log.info("---------------web configure-----------------");
+        // 정적 파일 요청 무시하는 설정
+        return (web) -> web.ignoring()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
     @Bean
-    public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
-        log.info("----------configure-------------");
-
-        // AuthenticationManager 설정 : 인증 관리자 생성을 위한 빌더 생성
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        // 인증 관리자 빌더를 사용하여 userDetailsService 설정과 passwordEncoder 설정
+    public SecurityFilterChain filterChain (final HttpSecurity http) throws Exception {
+        log.info("---------------configure-----------------------");
+        // 인증 관리자 생성위한 빌더 생성
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        //인증 관리자 빌더를 사용하여 userDetailsSevice 설정과 passwordEncoder 설정
         authenticationManagerBuilder
                 .userDetailsService(apiUserDetailsService)
-                        .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder());
+        // 인증관리자 빌더를 통해 인증관리자를 생성
+        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
+        //http에 인증관리자 설정
+        http.authenticationManager(authenticationManager);
 
-        // Get AuthenticationManager : 인증 관리자 빌더를 통해 인증 관리자를 생성
-        AuthenticationManager authenticationManager =
-                authenticationManagerBuilder.build();
-
-        http.authenticationManager(authenticationManager); // 반드시 필요한 부분 > http에 인증관리자를 설정
-
-        // APILoginFilter 를 불러올 때 사용할 URL설정하기
+        // APILoginFilter 를 불러올때 사용할 URL 설정
         APILoginFilter apiLoginFilter = new APILoginFilter("/generateToken");
-        // APILoginFilter 가 위에서 만든 인증 관리자를 사용하게끔 설정
+        //APILoginFilter가 위에서 만든 인증 관리자를 사용할지 설정
         apiLoginFilter.setAuthenticationManager(authenticationManager);
 
-        // APILoginSuccessHandler
+        //APILoginSuccessHandler 선언
         APILoginSuccessHandler successHandler = new APILoginSuccessHandler(jwtUtil);
-        // SuccessHandler 세팅
+        //SuccessHandler 세팅
         apiLoginFilter.setAuthenticationSuccessHandler(successHandler);
 
-        // APILoginFilter의 위치 조정 > APILoginFilter 전에 실행할 필터를 설정
+        // APILoginFilter 전에 실행할 필터를 설정
         http.addFilterBefore(apiLoginFilter, UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(tokenCheckFilter(jwtUtil,apiUserDetailsService), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(new RefreshTokenFilter("/refreshToken", jwtUtil), TokenCheckFilter.class);
 
+        http.addFilterBefore(
+                tokenCheckFilter(jwtUtil, apiUserDetailsService),
+                UsernamePasswordAuthenticationFilter.class
+        );
+        //TokenCheckFilter실행되기 전 RefreshTokenFilter가 실행됨
+        http.addFilterBefore(new RefreshTokenFilter("/refreshToken",jwtUtil), TokenCheckFilter.class);
 
-        http.csrf().disable(); // csrf 설정 끄기
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 세션 생성 설정 끄기
+        //csrf 설정 끄기
+        http.csrf().disable();
+        // 세션 생생 설정 끄기
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.cors(httpSecurityCorsConfigurer -> {
-            httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource());
-        });
+        //CORS 설정
+        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(corsConfigurationSource()));
+
         return http.build();
     }
-
     private TokenCheckFilter tokenCheckFilter(JWTUtil jwtUtil, APIUserDetailsService apiUserDetailsService){
         return new TokenCheckFilter(apiUserDetailsService,jwtUtil);
     }
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
-        // 모든 패턴 허락
-        // origin = protocol+host+port
-        // protocol : http:// , https://
-        // host : 도메인이나 ip주소
+        // 모든 패턴을 허락
+        // origin의 의미 : protocol+host+port
+        // protocol : http://, https://
+        // host : 도메인(localhost, www.naver.com, www.google.com)이나 ip주소
         // port : :80, :8080, :3306
         configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        // AJAX 에서  실행할 메서드
-        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE"));
+        // Ajax에서 실행할 메서드 설정
+        configuration.setAllowedMethods(Arrays.asList("HEAD","GET","POST","PUT","DELETE"));
         // 사용할 헤더 설정
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        // cors 사용설정하기
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control","Content-Type"));
+        //cors설정을 사용 설정
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**",configuration);
         return source;
     }
 }

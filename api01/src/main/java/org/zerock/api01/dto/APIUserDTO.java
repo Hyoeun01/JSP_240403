@@ -1,8 +1,7 @@
 package org.zerock.api01.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -11,16 +10,27 @@ import java.util.Collection;
 @Getter
 @Setter
 @ToString
+
 public class APIUserDTO extends User {
 
     private String mid;
     private String mpw;
+    private String name;
+    private String email;
+
+    private boolean emailChecked;
+    private boolean snsChecked;
 
     // UserDetails 에 아이디, 패스워드, 권한을 설정하기 위한 생성자
-    public APIUserDTO(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public APIUserDTO(String username, String password, String name, String email, boolean emailChecked, boolean snsChecked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
 
         this.mid = username;
         this.mpw = password;
+        this.name = name;
+        this.email = email;
+        this.emailChecked = emailChecked;
+        this.snsChecked = snsChecked;
+
     }
 }

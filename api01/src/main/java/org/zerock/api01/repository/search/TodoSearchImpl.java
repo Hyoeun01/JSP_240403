@@ -14,9 +14,8 @@ import org.zerock.api01.dto.TodoDTO;
 
 import java.util.List;
 
-@Log4j2
 public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSearch {
-    public TodoSearchImpl() {
+    public TodoSearchImpl(){
         super(Todo.class);
     }
 
@@ -24,10 +23,10 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
     public Page<TodoDTO> list(PageRequestDTO pageRequestDTO) {
         QTodo todo = QTodo.todo;
         JPQLQuery<Todo> query = from(todo);
-        if(pageRequestDTO.getFrom() != null && pageRequestDTO.getTo() != null) {
+        if(pageRequestDTO.getFrom() != null && pageRequestDTO.getTo() != null){
             BooleanBuilder fromToBuilder = new BooleanBuilder();
             fromToBuilder.and(todo.dueDate.goe(pageRequestDTO.getFrom()));
-            fromToBuilder.and(todo.dueDate.loe(pageRequestDTO.getTo()));
+            fromToBuilder.and (todo.dueDate.loe(pageRequestDTO.getTo()));
             query.where(fromToBuilder);
         }
         if(pageRequestDTO.getCompleted() != null){
@@ -36,17 +35,11 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
         if(pageRequestDTO.getKeyword() != null){
             query.where(todo.title.contains(pageRequestDTO.getKeyword()));
         }
-        this.getQuerydsl().applyPagination(pageRequestDTO.getPageable("tno"), query);
-
-        JPQLQuery<TodoDTO> dtoQuery = query.select(Projections.bean(TodoDTO.class,
-                todo.tno,
-                todo.title,
-                todo.dueDate,
-                todo.complete,
-                todo.writer));
+        this.getQuerydsl().applyPagination(pageRequestDTO.getPageable("tno"),query);
+        JPQLQuery<TodoDTO> dtoQuery = query.select(Projections.bean(TodoDTO.class,todo.tno, todo.title, todo.dueDate, todo.complete, todo.writer));
         List<TodoDTO> list = dtoQuery.fetch();
         long count = dtoQuery.fetchCount();
+        return new PageImpl<>(list, pageRequestDTO.getPageable("tno"),count);
 
-        return new PageImpl<>(list, pageRequestDTO.getPageable("tno"), count);
     }
 }

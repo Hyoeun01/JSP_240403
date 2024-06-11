@@ -23,66 +23,62 @@ import java.util.Map;
 @Log4j2
 @RequiredArgsConstructor
 public class TokenCheckFilter extends OncePerRequestFilter {
-    private final APIUserDetailsService apiUserDetailsService;
+    private final APIUserDetailsService userDetailsService;
     private final JWTUtil jwtUtil;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String path = request.getRequestURI();
-
         if(!path.startsWith("/api/")){
-            filterChain.doFilter(request,response);
+            filterChain.doFilter(request, response);
             return;
         }
-        log.info("Token Check Filter............");
-        log.info("JWTUtil : "+jwtUtil);
-
+        log.info("Token Check Filter.........................");
+        log.info("JWTUtil:" + jwtUtil);
         try{
-            Map<String, Object> payload = validateAccessToken(request);
+            Map<String,Object> payload = validateAccessToken(request);
 
-            // mid
             String mid = (String)payload.get("mid");
 
-            log.info("mid : "+ mid);
-
-            UserDetails userDetails = apiUserDetailsService.loadUserByUsername(mid);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(mid);
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            filterChain.doFilter(request,response);
-        } catch (AccessTokenException accessTokenException) {
+            filterChain.doFilter(request, response);
+        }catch(AccessTokenException accessTokenException){
             accessTokenException.sendResponseError(response);
         }
-    }
 
-    private Map<String, Object> validateAccessToken(HttpServletRequest request) throws AccessTokenException{
-        // authorization : type +인증값
-        // type의 종류 : basic, bearer(jwt) , digest, HOBA, mutual
+    }
+    //토큰이 정상인지 아닌지 확인하는 메서드
+    private Map<String,Object> validateAccessToken(HttpServletRequest request) throws AccessTokenException {
+        // Authorization : type+인증값
+        // JWT는 Bearer 타입을 사용
+        // type의 종류 : Basic, Bearer, Digest, HOBA, Mutual
         String headerStr = request.getHeader("Authorization");
-        if(headerStr == null || headerStr.length() < 8 ) {
+        if(headerStr == null || headerStr.length() < 8){
             throw new AccessTokenException(AccessTokenException.TOKEN_ERROR.UNACCEPT);
         }
-
-        // Bearer 타입 확인하기
+        //Bearer 타입확인
         String tokenType = headerStr.substring(0,6);
         String tokenStr = headerStr.substring(7);
-
-        if(tokenType.equalsIgnoreCase("Bearer") == false) {
+        if(tokenType.equalsIgnoreCase("Bearer") == false){
             throw new AccessTokenException(AccessTokenException.TOKEN_ERROR.BADTYPE);
         }
 
-        try {
-            Map<String, Object> values = jwtUtil.validateToken(tokenStr);
+        try{
+            Map<String,Object> values = jwtUtil.validateToken(tokenStr);
             return values;
-        } catch (MalformedJwtException malformedJwtException) {
-            log.error("MalformedJwtException.............................");
+        }catch(MalformedJwtException malformedJwtException){
+            log.error("MalformedJwtException--------------------");
             throw new AccessTokenException(AccessTokenException.TOKEN_ERROR.MALFORM);
-        } catch (SignatureException signatureException) {
-            log.error("SignatureException..........................");
+        }catch(SignatureException signatureException){
+            log.error("SignatureException-----------------------");
             throw new AccessTokenException(AccessTokenException.TOKEN_ERROR.BADSIGN);
-        } catch (ExpiredJwtException expiredJwtException) {
-            log.error("ExpiredJwtException............................");
+        }catch(ExpiredJwtException expiredJwtException){
+            log.error("ExpiredJwtException----------------------");
             throw new AccessTokenException(AccessTokenException.TOKEN_ERROR.EXPIRED);
         }
     }
