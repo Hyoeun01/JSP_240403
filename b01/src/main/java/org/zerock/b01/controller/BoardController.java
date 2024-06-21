@@ -48,7 +48,7 @@ public class BoardController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/register")
-    public void registerGet(){
+    public void registerGet() {
 
     }
     @PostMapping("/register")
