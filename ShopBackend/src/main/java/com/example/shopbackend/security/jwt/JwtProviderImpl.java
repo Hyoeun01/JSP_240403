@@ -1,6 +1,8 @@
 package com.example.shopbackend.security.jwt;
 
 import com.example.shopbackend.security.UserPrinciple;
+import com.example.shopbackend.util.SecurityUtils;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -37,6 +39,18 @@ public class JwtProviderImpl implements JwtProvider {
                 .setExpiration(new Date(System.currentTimeMillis()+JWT_EXPIRATION_IN_MS))
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
+    }
+
+    private Claims extractClaims(HttpServletRequest request){
+        String token = SecurityUtils.extractAuthTokenFromRequest(request);
+        if(token==null) return null;
+        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+
     }
 
     @Override
