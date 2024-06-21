@@ -8,13 +8,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -54,9 +57,22 @@ public class JwtProviderImpl implements JwtProvider {
     }
 
     @Override
-    public Authentication getAuthentication(HttpServletRequest request) {
-        return null;
-    }
+    public UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+        Claims claims = extractClaims(request);
+        if(claims == null) return null;
+        String username = claims.getSubject();
+        Long userId = claims.get("userId", Long.class);
+        Set<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
+                .map(SecurityUtils::convertToAuthority)
+                .collect(Collectors.toSet());
+        UserDetails userDetails = UserPrinciple.builder()
+                .username(username)
+                .authorities(authorities)
+                .id(userId)
+                .build();
+        if(username == null) return null;
+        return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
+    } // 이름 비번 권한으로 인증토큰 생성하고 토큰이 사용가능한지 체크하기
 
     @Override
     public boolean isTokenValid(HttpServletRequest request) {
