@@ -76,6 +76,9 @@ public class JwtProviderImpl implements JwtProvider {
 
     @Override
     public boolean isTokenValid(HttpServletRequest request) {
-        return false;
-    }
+        Claims claims = extractClaims(request);
+        if(claims == null) return false;
+        if(claims.getExpiration().before(new Date())) return false;
+        return true;
+    } // 토큰 유효성 체크하는 메서드
 }
