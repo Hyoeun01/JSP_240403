@@ -9,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -28,57 +29,81 @@ public class JwtProviderImpl implements JwtProvider {
 
     @Value("${app.jwt.expiration-in-ms}")
     private Long JWT_EXPIRATION_IN_MS;
-
     @Override
     public String generateToken(UserPrinciple auth) {
-        String authorities = auth.getAuthorities().stream()
+        String authorites = auth.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
+
         Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
-                .claim("roles", authorities)
+                .setSubject(auth.getUsername())
+                .claim("roles", authorites)
                 .claim("userId", auth.getId())
-                .setExpiration(new Date(System.currentTimeMillis()+JWT_EXPIRATION_IN_MS))
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_IN_MS))
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
     }
 
-    private Claims extractClaims(HttpServletRequest request){
-        String token = SecurityUtils.extractAuthTokenFromRequest(request);
-        if(token==null) return null;
-        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
-        return Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-    }
-
     @Override
-    public UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+    public Authentication getAuthentication(HttpServletRequest request) {
         Claims claims = extractClaims(request);
+
         if(claims == null) return null;
+
         String username = claims.getSubject();
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+username);
         Long userId = claims.get("userId", Long.class);
+
         Set<GrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
                 .map(SecurityUtils::convertToAuthority)
                 .collect(Collectors.toSet());
+
         UserDetails userDetails = UserPrinciple.builder()
-                .username(username)
+                .username((username))
                 .authorities(authorities)
                 .id(userId)
                 .build();
-        if(username == null) return null;
+        if(username == null) {
+            System.out.println("username null error");
+            return null;
+        }
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+userDetails.getUsername());
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!"+userDetails.getAuthorities());
+
         return new UsernamePasswordAuthenticationToken(userDetails, null, authorities);
-    } // 이름 비번 권한으로 인증토큰 생성하고 토큰이 사용가능한지 체크하기
+    }
 
     @Override
     public boolean isTokenValid(HttpServletRequest request) {
         Claims claims = extractClaims(request);
-        if(claims == null) return false;
+
+        if(claims == null) {
+            System.out.println("claims null error");
+            return false;
+        }
+
         if(claims.getExpiration().before(new Date())) return false;
+
         return true;
-    } // 토큰 유효성 체크하는 메서드
+    }
+
+
+    private Claims extractClaims(HttpServletRequest request){
+        String token = SecurityUtils.extractAuthTokenFromRequest(request);
+
+        if(token == null) {
+            System.out.println("token null error");
+            return null;
+        }
+
+        Key key = Keys.hmacShaKeyFor(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
+
+        return  Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
 }

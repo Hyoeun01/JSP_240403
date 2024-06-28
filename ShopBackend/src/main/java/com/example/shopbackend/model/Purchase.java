@@ -28,8 +28,8 @@ public class Purchase {
     @JoinColumn(name="product_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Product product;
 
-    @Column(name="price", nullable = false)
-    private Integer price;
+    @Column(name="quantity", nullable = false)
+    private Integer quantity;
 
     @Column(name="purchase_time", nullable = false)
     private LocalDateTime purchaseTime;

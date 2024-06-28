@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface PurchaseService {
     Purchase savePurchase(Purchase purchase);
-    List<PurchaseItem> findPurchaseItemsOfUser(Long userId);
+
+    List<PurchaseItem> findPurchaseItemsOfUser(String username);
 }

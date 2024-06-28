@@ -6,10 +6,7 @@ import com.example.shopbackend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
@@ -18,8 +15,14 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
+
     @PutMapping("/change/{role}")
     public ResponseEntity<Object> changeRole(@AuthenticationPrincipal UserPrinciple userPrinciple, @PathVariable Role role){
+        System.out.println("토큰확인");
         userService.changeRole(role, userPrinciple.getUsername());
         return ResponseEntity.ok(true);
     }
